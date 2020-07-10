@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agenda tu cita</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="../css/dark.css" type="text/css" />
+	<link rel="stylesheet" href="../css/font-icons.css" type="text/css" />
+      
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../css/components/datepicker.css" type="text/css" />
+	<link rel="stylesheet" href="../css/components/timepicker.css" type="text/css" />
+    <link rel="stylesheet" href="../style.css" type="text/css" />
+    
+    <link rel="stylesheet" href="../css/responsive.css" type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+    
+    
+    <style>
+        .stepwizard-step p {
+    margin-top: 0px;
+    color:#666;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    /*opacity: 1 !important;
+    filter: alpha(opacity=100) !important;*/    
+}
+.stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn {
+    opacity:1 !important;
+    color:#ccc;
+}
+.stepwizard-row:before {
+    top: 19px;
+    bottom: 0;
+    position: absolute;
+    content:" ";
+    width: 100%;
+    height: 7px;
+    background-color: #ccc;
+    border-radius: 7px;
+    z-index: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+    
+}
+.btn-circle {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    padding: 7px 0;
+    font-size: 25px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    line-height: 1.428571429;
+    border-radius: 25px;
+    
+}
+    
+    
+    
+    
+    </style>
+    
+</head>
+<body class="stretched">
+    
+    	<header id="header" class="full-header">
+
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href="index.html" class="standard-logo" data-dark-logo="../images/motorflex-light.png"><img src="../images/motorflex-light.png" alt="Motorflex logo"></a>
+						<a href="index.html" class="retina-logo" data-dark-logo="../images/motorflex-dark@2x.png"><img src="../images/motorflex-light@2x.png" alt="Motorflex logo"></a>
+					</div><!-- #logo -->
+
+					<!-- Menu
+					============================================= -->
+					<nav id="primary-menu">
+
+						<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+							<li><a  href="../reporte/reporte.html"><div>Crear Reporte</div></a></li>
+                            <li><a  href="../actreporte/complemento.html"><div>Actualizar Reporte</div></a></li>
+                            <li><a style="color: #ccc;"  href="#"><div>Orden</div></a></li>
+							
+                            
+							
+						</ul>
+                        
+                        
+                        <!--buscador
+				<div id="top-search">
+							<a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+							<form action="search.html" method="get">
+								<input type="text" name="q" class="form-control" value="" placeholder="Escribe &amp; y pulsa Enter..">
+							</form>
+						</div> -->
+                            <!-- #top-search end -->
+                        
+                        
+                        
+                        	
+                        
+                        
+					</nav><!-- #menu -->
+
+				</div>
+
+			</div>
+
+		</header><!-- #header -->
+    
+    
+    
+        
+   
+    <section id="content">
+    
+    <br>
+        <br>
+    
+    <div class="container">
+    <div class="stepwizard">
+        <div class="stepwizard-row setup-panel">
+            <div class="stepwizard-step col-xs-3"> 
+                <a href="#step-1" type="button" class="btn btn-success btn-circle "><i class="icon-line-paper"></i></a>
+                <p>Orden</p>
+            </div>
+            <div class="stepwizard-step col-xs-3"> 
+                <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled"><i class="icon-motorcycle"></i></a>
+                <p>Datos de la moto</p>
+            </div>
+            <div class="stepwizard-step col-xs-3"> 
+                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled"><i class="icon-user-tie"></i></a>
+                <p>Datos de usuario</p>
+            </div>
+            <div class="stepwizard-step col-xs-3"> 
+                <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled"><i class="icon-home2"></i></a>
+                <p>Dirección de usuario</p>
+            </div>
+        </div>
+    </div>
+    
+    <form role="form" id="contactForm" data-toggle="validator" class="shake" >
+        <div style="border-color: #ccc !important;" class="panel panel-primary setup-content" id="step-1">
+            <div style="background-color: #0c45a8;" class="panel-heading">
+                 <h3 class="panel-title">Orden</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label">Número de reporte</label>
+                    <input maxlength="10" id="nreporte" type="text" required="required" class="form-control" placeholder="Ingresa el número" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                </div>
+                <div class="form-group dates">
+                    <label class="control-label">Fecha de ingreso</label>
+                    <input id="fecingreso" type="text" class="form-control" id="fecingreso" name="event_date" placeholder="YYYY-MM-DD" autocomplete="off" >
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Estatus</label>
+                    <input maxlength="10" id="estatus" type="text" required="required" class="form-control" placeholder="Ingresa el status"  />
+                </div>
+                 <div class="form-group">
+                    <label class="control-label">Características</label>
+                    <input maxlength="10" id="caracteristicas" type="text" required="required" class="form-control" placeholder="Añade las características"  />
+                </div>
+                <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
+            </div>
+        </div>
+        
+        
+        
+        <div style="border-color: #ccc !important;" class="panel panel-primary setup-content" id="step-2">
+            <div style="background-color: #0c45a8;" class="panel-heading">
+                 <h3 class="panel-title">Datos de la moto</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label">Número de serie </label>
+                    <input maxlength="30" id="serie" type="text" required="required" class="form-control" placeholder="Ingresa el número" onkeyup="this.value = this.value.toUpperCase();" />
+                </div>
+                <div class="form-group dates">
+                    <label class="control-label">Número de motor</label>
+                    <input maxlength="50" id="motor" type="text" required="required" class="form-control" placeholder="Ingresa el número" onkeyup="this.value = this.value.toUpperCase();"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Placas</label>
+                    <input maxlength="10" id="placas" type="text" required="required" class="form-control" placeholder="Ingresa las placas" onkeyup="this.value = this.value.toUpperCase();"  />
+                </div>
+                 <div class="form-group">
+                    <label>Marca</label>
+            <label><select name="marca" id="marca">                    
+                    <?php
+                        include 'inc/conexion.php';
+                        
+                        $ejecuta=selects('*', 'cat_marca');
+                     ?>   
+                    <?php foreach ($ejecuta as $opciones): ?>
+                    <option value="<?php    echo $opciones['Descripcion']?>"> <?php  echo $opciones['Descripcion']?></option>
+                    
+                    <?php endforeach?>               
+            </select></label>
+                </div>
+                <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
+            </div>
+        </div>
+        
+        
+        <div style="border-color: #ccc !important;" class="panel panel-primary setup-content" id="step-3">
+            <div style="background-color: #0c45a8;" class="panel-heading">
+                 <h3 class="panel-title">Datos de usuario</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="control-label">Nombre</label>
+                    <input maxlength="30" id="nombre" type="text" required="required" class="form-control" placeholder="Ingresa el nombre" onkeyup="this.value = this.value.toUpperCase();"  />
+                </div> 
+                <div class="form-group">
+                    <label class="control-label">Primer Apellido</label>
+                    <input maxlength="20" id="papellido" type="text" required="required" class="form-control" placeholder="Ingresa el primer Apellido" onkeyup="this.value = this.value.toUpperCase();"  />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Segundo Apellido</label>
+                    <input maxlength="20" id="sapellido" type="text" required="required" class="form-control" placeholder="Ingresa el segundo Apellido" onkeyup="this.value = this.value.toUpperCase();"   />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Teléfono</label>
+                    <input maxlength="10" id="tel" type="tel" required="required" class="form-control" placeholder="Ingresa el número" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" />
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label">Correo</label>
+                    <input maxlength="50" id="correo" type="text" required="required" class="form-control" placeholder="Ingresa el correo"  />
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label">RFC</label>
+                    <input maxlength="13" id="rfc" type="text" required="required" class="form-control" placeholder="Ingresa el RFC" onkeyup="this.value = this.value.toUpperCase();" />
+                </div>
+                <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
+            </div>
+        </div>
+        
+        
+        <div style="border-color: #ccc !important;" class="panel panel-primary setup-content" id="step-4">
+            <div style="background-color: #0c45a8;" class="panel-heading">
+                 <h3 class="panel-title">Dirección de usuario</h3>
+            </div>
+            <div class="panel-body">
+                  <div class="form-group">
+                    <label class="control-label">Alcaldía</label>
+                    <input maxlength="50" id="alcmun" type="text" required="required" class="form-control" placeholder="Ingresa la alcaldía" onkeyup="this.value = this.value.toUpperCase();" />
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label">CP</label>
+                    <input maxlength="10" id="cp" type="text" required="required" class="form-control" placeholder="Ingresa el Código Postal" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Colonia</label>
+                    <input maxlength="30" id="colonia" type="text" required="required" class="form-control" placeholder="Ingresa la Colonia" onkeyup="this.value = this.value.toUpperCase();" />
+                </div>
+                 <div class="form-group">
+                    <label class="control-label">Calle</label>
+                    <input maxlength="50" id="calle" type="text" required="required" class="form-control" placeholder="Ingresa la calle" onkeyup="this.value = this.value.toUpperCase();"  />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Número</label>
+                    <input maxlength="10" id="calle" type="text" required="required" class="form-control" placeholder="Ingresa el número" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"  />
+                </div>
+                <button type="submit" id="form-submit" value="registrar" class="button button-rounded button-reveal button-xlarge "><i class="icon-motorcycle"></i><span>Registrar</span></button>
+            </div>
+        </div>
+ 
+    </form>
+         <div id="msgSubmit" class="h3 text-center hidden"></div>
+</div>
+        
+        </section>
+        
+        <br>
+        
+        
+        
+        
+    
+     <script>
+       
+       $(document).ready(function () {
+
+    var navListItems = $('div.setup-panel div a'),
+        allWells = $('.setup-content'),
+        allNextBtn = $('.nextBtn');
+
+    allWells.hide();
+
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+            $item = $(this);
+
+        if (!$item.hasClass('disabled')) {
+            navListItems.removeClass('btn-success').addClass('btn-default');
+            $item.addClass('btn-success');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+
+    allNextBtn.click(function () {
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+
+        $(".form-group").removeClass("has-error");
+        for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+
+        if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+    });
+
+    $('div.setup-panel div a.btn-success').trigger('click');
+});
+    
+    </script>
+    
+    
+    
+    
+         <script>
+       
+             
+             $(function() {
+			$('.dates #fecingreso').datepicker({
+				'format': 'yyyy-mm-dd',
+				'autoclose': true,
+                                'language': "es",
+                                'startDate': '+1d'                                
+			});
+		});
+
+             
+    </script>
+        
+        
+</body>
+
+<script type="text/javascript" src="js/validator.min.js"></script>
+<script type="text/javascript" src="js/form-scripts2.js"></script>
+    
+
+    <script src="../js/components/moment.js"></script>
+	<script src="../js/components/datepicker.js"></script>
+	<script src="../js/components/timepicker.js"></script>
+
+    
+   <script>
+		$(function() {
+			$('.travel-date-group .default').datepicker({
+				autoclose: true,
+				startDate: "today",
+			});
+
+			$('.travel-date-group .today').datepicker({
+				autoclose: true,
+				startDate: "today",
+				todayHighlight: true
+			});
+
+			$('.travel-date-group .past-enabled').datepicker({
+				autoclose: true,
+			});
+
+			$('.travel-date-group .format').datepicker({
+				autoclose: true,
+				format: "dd-mm-yyyy",
+			});
+
+			$('.travel-date-group .autoclose').datepicker();
+
+			$('.travel-date-group .disabled-week').datepicker({
+				autoclose: true,
+				daysOfWeekDisabled: "0"
+			});
+
+			$('.travel-date-group .highlighted-week').datepicker({
+				autoclose: true,
+				daysOfWeekHighlighted: "0"
+			});
+
+			$('.travel-date-group .mnth').datepicker({
+				autoclose: true,
+				minViewMode: 1,
+				format: "mm/yy"
+			});
+
+			$('.travel-date-group .multidate').datepicker({
+				multidate: true,
+				multidateSeparator: " , "
+			});
+
+			$('.travel-date-group .input-daterange').datepicker({
+				autoclose: true
+			});
+
+			$('.travel-date-group .inline-calendar').datepicker();
+
+			$('.datetimepicker').datetimepicker({
+				showClose: true
+			});
+
+			$('.datetimepicker1').datetimepicker({
+				format: 'LT',
+				showClose: true
+			});
+
+			$('.datetimepicker2').datetimepicker({
+				inline: true,
+				sideBySide: true
+			});
+
+			$('.datetimepicker3').datetimepicker();
+
+		});
+
+		$(function() {
+			// .daterange1
+			$(".daterange1").daterangepicker({
+				"buttonClasses": "button button-rounded button-mini nomargin",
+				"applyClass": "button-color",
+				"cancelClass": "button-light"
+			});
+
+			// .daterange2
+			$(".daterange2").daterangepicker({
+				"opens": "center",
+				timePicker: true,
+				timePickerIncrement: 30,
+				locale: {
+					format: 'MM/DD/YYYY h:mm A'
+				},
+				"buttonClasses": "button button-rounded button-mini nomargin",
+				"applyClass": "button-color",
+				"cancelClass": "button-light"
+			});
+
+			// .daterange3
+			$(".daterange3").daterangepicker({
+				singleDatePicker: true,
+				showDropdowns: true
+			},
+			function(start, end, label) {
+				var years = moment().diff(start, 'years');
+				alert("You are " + years + " years old.");
+			});
+
+			// reportrange
+			function cb(start, end) {
+				$(".reportrange span").html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+			}
+			cb(moment().subtract(29, 'days'), moment());
+
+			$(".reportrange").daterangepicker({
+				"buttonClasses": "button button-rounded button-mini nomargin",
+				"applyClass": "button-color",
+				"cancelClass": "button-light",
+				ranges: {
+				   'Today': [moment(), moment()],
+				   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+				   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+				   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+				   'This Month': [moment().startOf('month'), moment().endOf('month')],
+				   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+				}
+			}, cb);
+
+			// .daterange4
+			$(".daterange4").daterangepicker({
+				autoUpdateInput: false,
+				locale: {
+					cancelLabel: 'Clear'
+				},
+				"buttonClasses": "button button-rounded button-mini nomargin",
+				"applyClass": "button-color",
+				"cancelClass": "button-light"
+			});
+
+			$(".daterange4").on('apply.daterangepicker', function(ev, picker) {
+				$(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+			});
+
+			$(".daterange4").on('cancel.daterangepicker', function(ev, picker) {
+				$(this).val('');
+			});
+
+		});
+
+	</script>
+    
+    
+  
+    
+</html>

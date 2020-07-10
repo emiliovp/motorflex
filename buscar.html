@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="SemiColonWeb" />
+
+	<!-- Stylesheets
+	============================================= -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="css/dark.css" type="text/css" />
+	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
+	<link rel="stylesheet" href="css/animate.css" type="text/css" />
+	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+    <link rel="stylesheet" href="tabla.css" type="text/css" />
+    
+    
+   
+
+
+   
+    
+    <style type="text/css">
+	p.warning {
+		display: none;
+		background: #f1b10e;
+        color: #000;
+		padding: 10px;
+		font-size: 12px;
+		margin: 0;
+	}
+
+	@media (orientation: landscape) and (min-width: 400px) and (max-width: 768px) {
+		p.warning {
+			display: block;
+            
+		}
+	}
+	img {
+		
+		height: auto;
+	}
+	</style>
+
+
+	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+	<!-- Document Title
+	============================================= -->
+	<title>Buscar | Reporte</title>
+
+</head>
+
+<body class="stretched dark">
+    
+    
+    
+    <h2></h2>
+
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="clearfix">
+        
+   	<header id="header" class="full-header dark">
+
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo">
+						<a href="index.html" class="standard-logo" data-dark-logo="images/motorflex-dark.png"><img src="images/motorflex-dark.png" alt="Motorflex logo"></a>
+						<a href="index.html" class="retina-logo" data-dark-logo="images/motorflex-dark@2x.png"><img src="images/motorflex-dark@2x.png" alt="Motorflex logo"></a>
+					</div><!-- #logo -->
+
+					<!-- Menu
+					============================================= -->
+					<nav id="primary-menu">
+
+						<ul class="one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="65">
+							<li><a href="index.html"><div>Home</div></a></li>
+							<li><a href="#"><div>Taller</div></a></li>
+							<li><a href="#"><div>Tips</div></a></li>
+                            <li><a href="tabulador.html"><div>Cotiza servicios</div></a></li>
+							<li><a href="#" data-href="#section-contact"><div>Contacto</div></a></li>
+                            <li><a href="citas.html"><div><i class="icon-motorcycle"></i>Citas</div></a></li>
+						</ul>
+                        
+                        
+                        <!--buscador
+				<div id="top-search">
+							<a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+							<form action="search.html" method="get">
+								<input type="text" name="q" class="form-control" value="" placeholder="Escribe &amp; y pulsa Enter..">
+							</form>
+						</div> -->
+                            <!-- #top-search end -->
+                        
+                        
+                        
+                        	
+                        
+                        
+					</nav><!-- #menu -->
+
+				</div>
+
+			</div>
+
+		</header><!-- #header -->
+
+        
+        
+
+        
+		<!-- Content
+		============================================= -->
+		<section id="content">
+
+			<div class="content-wrap ">
+
+				<div class="container center clearfix">
+
+					
+<div class="row justify-content-center">
+						<div class="col-lg-7 col-md-10">
+							<div class="card shadow-sm">
+								<div class="card-header">
+									<h4 class="mb-0">Buscar reporte</h4>
+								</div>
+								<div class="card-body">
+
+									<div class="form-widget">
+
+										<div class="form-result"></div>
+
+										<div class="form-process css3-spinner">
+											<div class="css3-spinner-double-bounce1"></div>
+											<div class="css3-spinner-double-bounce2"></div>
+										</div>
+
+										
+
+											<div class="row">
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-name">Ingresa tu número de reporte<small class="text-danger">*</small></label>
+													<input type="text" id="nreporte" name="template-contactform-name" value="" class="form-control required" placeholder="Ej. A1263" />
+												</div>
+												<div class="col-12">
+													<button type="submit" id="buscar" name="enviar" value="Buscar" class="button button-rounded button-reveal button-xlarge "><i class="icon-motorcycle"></i><span>Buscar</span></button>
+												</div>
+
+												
+											</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+                    <br>
+                    <div class="divcenter center clearfix" style="max-width: 900px;">
+						
+						<p class="warning">Voltea tu teléfono para visualizar el resultado</p>
+                        <br>
+                        <div style="align-content: center;" id="resultado"></div>
+                        <br>
+                        
+                        <div style="text-align: justify">
+                        
+                        <p><strong style="font-size: 18px; color: #f1b10e;">Importante:</strong><br>
+<strong style="color: #f1b10e;">Solicitud de refacciones:</strong> Hacemos el pedido de las refacciones necesarias para la reparación de tu unidad. <br>
+<strong style="color: #f1b10e;">Refacciones disponibles:</strong> % de refacciones que tenemos del total de refacciones que solicitamos.<br>
+<strong style="color: #f1b10e;">Unidad en Rampa:</strong> La unidad no puede asignar a una rampa hasta no contar con el 100% de las refacciones y partes.<br> 
+<strong style="color: #f1b10e;">Reparación Unidad:</strong> % de avance en la reparación de tu unidad. <br>
+<strong style="color: #f1b10e;">Fecha de entrega:</strong> Damos la fecha promesa de entrega una vez que tengamos las refacciones de tu unidad.</p>
+                        </div>
+					</div>
+                    
+                    
+                    
+                  
+                    
+                
+
+				</div>
+
+			</div>
+
+		</section><!-- #content end -->
+
+	</div><!-- #wrapper end -->
+
+	<!-- Go To Top
+	============================================= -->
+	<div id="gotoTop" class="icon-angle-up"></div>
+
+	<!-- External JavaScripts
+	============================================= -->
+	<script src="js/jquery.js"></script>
+	<script src="js/plugins.js"></script>
+    <script src="js/seguimiento/buscar.js" type="text/javascript"></script>
+    
+    
+    
+	<!-- Footer Scripts
+	============================================= -->
+	<script src="js/functions.js"></script>
+    
+    
+    
+    
+</body>
+</html>

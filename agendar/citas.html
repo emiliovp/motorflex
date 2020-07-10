@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agenda tu cita</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    	<link rel="stylesheet" href="../css/responsive.css" type="text/css" />
+    <link rel="stylesheet" href="../css/dark.css" type="text/css" />
+	<link rel="stylesheet" href="../css/font-icons.css" type="text/css" />
+      
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../css/components/datepicker.css" type="text/css" />
+	<link rel="stylesheet" href="../css/components/timepicker.css" type="text/css" />
+    
+    	<link rel="stylesheet" href="../style.css" type="text/css" />
+    
+    
+    
+</head>
+<body class="stretched">
+    
+    	
+    
+    <section id="content">
+    
+        
+        
+    
+<div class="row">
+<div class="col-sm-6 col-sm-offset-3">
+    <div class="container well"  style="margin-top: 5%;">
+        
+    <h3>Agenda tu cita</h3>
+        
+        
+    <form role="form" id="contactForm" data-toggle="validator" class="shake" >
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="name" >Nombre*</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" required data-error="Necesitamos saber tu nombre">
+                <div class="help-block with-errors "></div>
+                
+              
+                
+                
+            </div>
+            
+            
+            <div class="form-group col-sm-6">
+                <label for="name" >Apellido*</label>
+                <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu nombre" required data-error="Necesitamos saber tu apellido">
+                <div class="help-block with-errors"></div>
+            </div>
+            
+               <div class="form-group col-sm-6">
+                <label for="tel">Teléfono de contacto*</label>
+                <input type="tel" class="form-control" id="tel" placeholder="Ingresa tu teléfono 10 dígitos" pattern="^\d{10}$" required >
+                <div class="help-block with-errors"></div>
+            </div>
+            
+            <div class="form-group col-sm-6">
+                <label for="email">Email*</label>
+                <input type="email" class="form-control" id="email" placeholder="Ingresa tu Mail" required >
+                <div class="help-block with-errors"></div>
+            </div>
+            
+             <div class="form-group col-sm-6">
+                <label for="placas" >Placas*</label>
+                <input type="text" class="form-control" id="placas" placeholder="Ingresa tus placas" required>
+                <div class="help-block with-errors"></div>
+            </div>
+            
+            <div class="form-group col-sm-6">
+                <label for="Marca" >Marca*</label>
+                <input type="text" class="form-control" id="marca" placeholder="Yamaha|BMW|Italika" required>
+                <div class="help-block with-errors"></div>
+            </div>
+            
+   <div class="form-group col-sm-4 dates">
+                <label for="fecha" >Fecha*</label>
+                  <input type="text" class="form-control" id="usr1" name="event_date" placeholder="YYYY-MM-DD" autocomplete="off" >
+        </div>  
+                <div class="help-block with-errors"></div>
+            </div>
+            
+            
+            
+    
+        <div class="form-group">
+            <label for="message">Observaciones</label>
+            <textarea id="observ" class="form-control" rows="5" placeholder="Escribe tu mensaje"></textarea>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div style="text-align:center;">
+        <button type="submit" id="form-submit" class="button button-rounded button-reveal button-xlarge "><i class="icon-map-marker2"></i><span>Agendar</span></button>
+        
+  </div>
+        
+        
+        <div id="msgSubmit" class="h3 text-center hidden"></div>
+        <div class="clearfix"></div>
+    </form>
+        
+        
+        
+         <script>
+       
+             
+             $(function() {
+			$('.dates #usr1').datepicker({
+				'format': 'yyyy-mm-dd',
+				'autoclose': true,
+                                'language': "es",
+                                'startDate': '+1d'                                
+			});
+		});
+
+             
+    </script>
+        
+        
+        
+        
+        
+    </div>
+</div>
+</div>
+        
+        
+        
+    </section>
+        
+</body>
+
+<script type="text/javascript" src="js/validator.min.js"></script>
+<script type="text/javascript" src="js/form-scripts.js"></script>
+    
+
+    <script src="../js/components/moment.js"></script>
+	<script src="../js/components/datepicker.js"></script>
+	<script src="../js/components/timepicker.js"></script>
+
+    
+   <script>
+		$(function() {
+			$('.travel-date-group .default').datepicker({
+				autoclose: true,
+				startDate: "today",
+			});
+
+			$('.travel-date-group .today').datepicker({
+				autoclose: true,
+				startDate: "today",
+				todayHighlight: true
+			});
+
+			$('.travel-date-group .past-enabled').datepicker({
+				autoclose: true,
+			});
+
+			$('.travel-date-group .format').datepicker({
+				autoclose: true,
+				format: "dd-mm-yyyy",
+			});
+
+			$('.travel-date-group .autoclose').datepicker();
+
+			$('.travel-date-group .disabled-week').datepicker({
+				autoclose: true,
+				daysOfWeekDisabled: "0"
+			});
+
+			$('.travel-date-group .highlighted-week').datepicker({
+				autoclose: true,
+				daysOfWeekHighlighted: "0"
+			});
+
+			$('.travel-date-group .mnth').datepicker({
+				autoclose: true,
+				minViewMode: 1,
+				format: "mm/yy"
+			});
+
+			$('.travel-date-group .multidate').datepicker({
+				multidate: true,
+				multidateSeparator: " , "
+			});
+
+			$('.travel-date-group .input-daterange').datepicker({
+				autoclose: true
+			});
+
+			$('.travel-date-group .inline-calendar').datepicker();
+
+			$('.datetimepicker').datetimepicker({
+				showClose: true
+			});
+
+			$('.datetimepicker1').datetimepicker({
+				format: 'LT',
+				showClose: true
+			});
+
+			$('.datetimepicker2').datetimepicker({
+				inline: true,
+				sideBySide: true
+			});
+
+			$('.datetimepicker3').datetimepicker();
+
+		});
+
+		$(function() {
+			// .daterange1
+			$(".daterange1").daterangepicker({
+				"buttonClasses": "button button-rounded button-mini nomargin",
+				"applyClass": "button-color",
+				"cancelClass": "button-light"
+			});
+
+			// .daterange2
+			$(".daterange2").daterangepicker({
+				"opens": "center",
+				timePicker: true,
+				timePickerIncrement: 30,
+				locale: {
+					format: 'MM/DD/YYYY h:mm A'
+				},
+				"buttonClasses": "button button-rounded button-mini nomargin",
+				"applyClass": "button-color",
+				"cancelClass": "button-light"
+			});
+
+			// .daterange3
+			$(".daterange3").daterangepicker({
+				singleDatePicker: true,
+				showDropdowns: true
+			},
+			function(start, end, label) {
+				var years = moment().diff(start, 'years');
+				alert("You are " + years + " years old.");
+			});
+
+			// reportrange
+			function cb(start, end) {
+				$(".reportrange span").html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+			}
+			cb(moment().subtract(29, 'days'), moment());
+
+			$(".reportrange").daterangepicker({
+				"buttonClasses": "button button-rounded button-mini nomargin",
+				"applyClass": "button-color",
+				"cancelClass": "button-light",
+				ranges: {
+				   'Today': [moment(), moment()],
+				   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+				   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+				   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+				   'This Month': [moment().startOf('month'), moment().endOf('month')],
+				   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+				}
+			}, cb);
+
+			// .daterange4
+			$(".daterange4").daterangepicker({
+				autoUpdateInput: false,
+				locale: {
+					cancelLabel: 'Clear'
+				},
+				"buttonClasses": "button button-rounded button-mini nomargin",
+				"applyClass": "button-color",
+				"cancelClass": "button-light"
+			});
+
+			$(".daterange4").on('apply.daterangepicker', function(ev, picker) {
+				$(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+			});
+
+			$(".daterange4").on('cancel.daterangepicker', function(ev, picker) {
+				$(this).val('');
+			});
+
+		});
+
+	</script>
+    
+    
+</html>

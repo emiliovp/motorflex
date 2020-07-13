@@ -5,7 +5,28 @@ class Model_reporte extends MY_Model {
 
 	private $primary_key 	= 'IdReporte';
 	private $table_name 	= 'reporte';
-	private $field_search 	= ['NumeroReporte', 'cliente', 'fechaingreso', 'orden', 'marca', 'modelo', 'ano', 'Valuacion', 'PresupuestoEnviado', 'PresupuestoAceptado', 'SolicitudRefacciones', 'refaccionesact', 'TotalRefacciones', 'RefaccionesDispoiblesPorcentaje', 'UnidadProgRampa', 'ReparacionUnidadPorcentaje', 'Deducible', 'MontoDeducible', 'FechaEntrega'];
+	private $field_search 	= [
+		'NumeroReporte', 
+		'cliente', 
+		'fechaingreso', 
+		'orden', 
+		'marca', 
+		'modelo', 
+		'ano', 
+		'Valuacion', 
+		'perdida_total', 
+		'PresupuestoEnviado', 
+		'PresupuestoAceptado', 
+		'SolicitudRefacciones', 
+		'refaccionesact', 
+		'TotalRefacciones', 
+		'RefaccionesDispoiblesPorcentaje', 
+		'UnidadProgRampa', 
+		'ReparacionUnidadPorcentaje', 
+		'Deducible', 
+		'MontoDeducible', 
+		'FechaEntrega'
+	];
 
 	public function __construct()
 	{

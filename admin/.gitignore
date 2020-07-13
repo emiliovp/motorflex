@@ -11,9 +11,6 @@ application/logs/*
 application/controllers/Test.php
 application/controllers/Test.php
 application/controllers/example.php
-application/config/site.php
-application/config/database.php
-application/config/config.php
 application/views/backend/standart/administrator/form_builder/*
 application/views/public/form_contact_form/*
 application/controllers/form/*
@@ -22,7 +19,6 @@ apidoc/module/*
 apidoc/*
 application/controllers/api/Example.php
 application/controllers/api/Key.php
-index.php
 
 apidoc/api_data.js
 

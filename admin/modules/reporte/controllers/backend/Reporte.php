@@ -81,7 +81,7 @@ class Reporte extends Admin
 		$this->form_validation->set_rules('modelo', 'Modelo', 'trim|required');
 		$this->form_validation->set_rules('ano', 'Año', 'trim|required');
 		$this->form_validation->set_rules('Valuacion', 'Valuacion', 'trim|required');
-		
+		$this->form_validation->set_rules('perdida_total', 'perdida_total', 'trim|required');
 
 		if ($this->form_validation->run()) {
 		
@@ -94,6 +94,7 @@ class Reporte extends Admin
 				'modelo' => $this->input->post('modelo'),
 				'ano' => $this->input->post('ano'),
 				'Valuacion' => $this->input->post('Valuacion'),
+				'perdida_total' => $this->input->post('perdida_total'),
 				'PresupuestoEnviado' => $this->input->post('PresupuestoEnviado'),
 				'PresupuestoAceptado' => $this->input->post('PresupuestoAceptado'),
 				'SolicitudRefacciones' => $this->input->post('SolicitudRefacciones'),

@@ -171,8 +171,22 @@
                                 </small>
                             </div>
                         </div>
+                        <div class="form-group ">
+                            <label for="perdida_total" class="col-sm-2 control-label">Perdida Total 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <select  class="form-control chosen chosen-select" name="perdida_total" id="perdida_total" data-placeholder="Seleccionar una opción" >
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
+                                </select>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
                                                  
-                                                <div class="form-group ">
+                        <div class="form-group ">
                             <label for="PresupuestoEnviado" class="col-sm-2 control-label">Presupuesto Enviado 
                             </label>
                             <div class="col-sm-8">
@@ -404,6 +418,8 @@
         var data_post = form_reporte.serializeArray();
         var save_type = $(this).attr('data-stype');
 
+        console.log(save_type);
+// return false;
         data_post.push({name: 'save_type', value: save_type});
     
         $('.loading').show();
@@ -486,6 +502,42 @@
 
 <script>
 (function($) {
+    $("#perdida_total").change(function() {
+        var perdidatotal = $(this).val();
+        if(perdidatotal == "SI") {
+            $('#PresupuestoEnviado').prop("disabled", true);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", true);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", true);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", true);
+            $('#TotalRefacciones').prop("disabled", true);
+            $('#calculo').prop("disabled", true);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", true);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", true);
+            $('#UnidadProgRampa').prop("disabled", true);
+            $('#Deducible').prop("disabled", true);
+            $('#MontoDeducible').prop("disabled", true);
+            $('#FechaEntrega').prop("disabled", true);
+        } else if(perdidatotal == "NO" || perdidatotal == "") {
+            $('#PresupuestoEnviado').prop("disabled", false);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", false);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", false);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", false);
+            $('#TotalRefacciones').prop("disabled", false);
+            $('#calculo').prop("disabled", false);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", false);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", false);
+            $('#UnidadProgRampa').prop("disabled", false);
+            $('#Deducible').prop("disabled", false);
+            $('#MontoDeducible').prop("disabled", false);
+            $('#FechaEntrega').prop("disabled", false);
+        }
+    });
   $.fn.conditionize = function(options){ 
     
      var settings = $.extend({

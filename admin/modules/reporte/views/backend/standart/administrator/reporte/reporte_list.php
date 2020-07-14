@@ -88,6 +88,7 @@ jQuery(document).ready(domo);
                            <th>Modelo</th>
                            <th>Año</th>
                            <th>Valuacion</th>
+                           <th>Perdida Total</th>
                            <th>Presupuesto Enviado</th>
                            <th>Presupuesto Aceptado</th>
                            <th>Solicitud De Refacciones</th>
@@ -119,6 +120,7 @@ jQuery(document).ready(domo);
                            <td><?= _ent($reporte->modelo); ?></td> 
                            <td><?= _ent($reporte->ano); ?></td> 
                            <td><?= _ent($reporte->Valuacion); ?></td> 
+                           <td><?= _ent($reporte->perdida_total); ?></td> 
                            <td><?= _ent($reporte->PresupuestoEnviado); ?></td> 
                            <td><?= _ent($reporte->PresupuestoAceptado); ?></td> 
                            <td><?= _ent($reporte->SolicitudRefacciones); ?></td> 

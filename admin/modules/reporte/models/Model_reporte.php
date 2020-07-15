@@ -76,7 +76,7 @@ class Model_reporte extends MY_Model {
         $where = NULL;
         $q = $this->scurity($q);
 		$field = $this->scurity($field);
-
+		$and = ("reporte.estatus_reporte = 1");
         if (empty($field)) {
 	        foreach ($this->field_search as $field) {
 	            if ($iterasi == 1) {
@@ -97,7 +97,8 @@ class Model_reporte extends MY_Model {
         }
 		
 		$this->join_avaiable()->filter_avaiable();
-        $this->db->where($where);
+		$this->db->where($where);
+		$this->db->where($and);
         $this->db->limit($limit, $offset);
         $this->db->order_by('reporte.'.$this->primary_key, "DESC");
 		$query = $this->db->get($this->table_name);
@@ -109,7 +110,7 @@ class Model_reporte extends MY_Model {
         $this->db->join('persona', 'persona.IdPersona = reporte.cliente', 'LEFT');
         $this->db->join('cat_marca', 'cat_marca.IdMarca = reporte.marca', 'LEFT');
         
-    	$this->db->select('reporte.*,persona.Apellidos as persona_Apellidos,cat_marca.Descripcion as cat_marca_Descripcion');
+    	$this->db->select('reporte.*,if(persona.Apellidos = persona.Nombre,persona.Nombre, concat(persona.Apellidos," ",persona.Nombre)) AS persona_Apellidos,cat_marca.Descripcion as cat_marca_Descripcion');
 
 
         return $this;

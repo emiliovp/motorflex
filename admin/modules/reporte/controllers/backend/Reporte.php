@@ -262,11 +262,17 @@ class Reporte extends Admin
 		$arr_id = $this->input->get('id');
 		$remove = false;
 
-		if (!empty($id)) {
-			$remove = $this->_remove($id);
+		$data = [
+			'estatus_reporte' => 2,
+			'updated_at'=> date('Y-m-d G:i:s')
+		];
+		if (isset($id)) {
+			// $remove = $this->_remove($id);
+			$remove = $this->model_reporte->change($id,$data);
 		} elseif (count($arr_id) >0) {
 			foreach ($arr_id as $id) {
-				$remove = $this->_remove($id);
+			// $remove = $this->_remove($id);
+			$remove = $this->model_reporte->change($id,$data);
 			}
 		}
 

@@ -83,6 +83,7 @@ jQuery(document).ready(domo);
                            <th>Número De Reporte</th>
                            <th>Cliente</th>
                            <th>Fecha De Ingreso</th>
+                           <th>Fecha Reporte</th>
                            <th>Orden</th>
                            <th>Marca</th>
                            <th>Modelo</th>
@@ -100,6 +101,7 @@ jQuery(document).ready(domo);
                            <th>Deducible</th>
                            <th>Monto Deducible</th>
                            <th>Fecha Promesa</th>
+                           <th>Estatus</th>
                            <th>Action</th>
                         </tr>
                      </thead>
@@ -114,6 +116,7 @@ jQuery(document).ready(domo);
                            <td><?= _ent($reporte->persona_Apellidos); ?></td>
                              
                            <td><?= _ent($reporte->fechaingreso); ?></td> 
+                           <td><?= _ent($reporte->created_at); ?></td>
                            <td><?= _ent($reporte->orden); ?></td> 
                            <td><?= _ent($reporte->cat_marca_Descripcion); ?></td>
                              
@@ -131,7 +134,18 @@ jQuery(document).ready(domo);
                            <td><?= _ent($reporte->ReparacionUnidadPorcentaje); ?></td> 
                            <td><?= _ent($reporte->Deducible); ?></td> 
                            <td><?= _ent($reporte->MontoDeducible); ?></td> 
-                           <td><?= _ent($reporte->FechaEntrega); ?></td> 
+                           <td><?= _ent($reporte->FechaEntrega); ?></td>
+                           <td><? $var= $reporte->estado; switch ($var) {
+                              case '1':
+                                 $estado = "Abierto";
+                                 break;
+                              case '2':
+                                 $estado = "En proceso";
+                                 break;
+                              case '3':
+                                 $estado = "Cerrado";
+                                 break;
+                           } echo($estado); ?></td> 
                            <td width="200">
                               <?php is_allowed('reporte_view', function() use ($reporte){?>
                               <a href="<?= site_url('administrator/reporte/view/' . $reporte->IdReporte); ?>" class="label-default"><i class="fa fa-newspaper-o"></i> <?= cclang('view_button'); ?>

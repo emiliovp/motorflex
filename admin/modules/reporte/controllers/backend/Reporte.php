@@ -81,7 +81,10 @@ class Reporte extends Admin
 		$this->form_validation->set_rules('modelo', 'Modelo', 'trim|required');
 		$this->form_validation->set_rules('ano', 'Año', 'trim|required');
 		$this->form_validation->set_rules('Valuacion', 'Valuacion', 'trim|required');
-		$this->form_validation->set_rules('perdida_total', 'perdida_total', 'trim|required');
+		$this->form_validation->set_rules('perdida_total', 'Perdida Total', 'trim|required');
+		$this->form_validation->set_rules('pago_danos', 'Pago de Daños', 'trim|required');
+		$this->form_validation->set_rules('comentario_interno', 'Comentario Interno', 'trim');
+		$this->form_validation->set_rules('comentario_externo', 'Comentario Externo', 'trim');
 
 
 		if ($this->form_validation->run()) {
@@ -96,20 +99,23 @@ class Reporte extends Admin
 				'ano' => $this->input->post('ano'),
 				'Valuacion' => $this->input->post('Valuacion'),
 				'perdida_total' => $this->input->post('perdida_total'),
+				'pago_danos' => $this->input->post('pago_danos'),
 				'PresupuestoEnviado' => ($this->input->post('PresupuestoEnviado')) ? $this->input->post('PresupuestoEnviado') : "",
 				'PresupuestoAceptado' => ($this->input->post('PresupuestoAceptado')) ? $this->input->post('PresupuestoAceptado') : "",
 				'SolicitudRefacciones' => ($this->input->post('SolicitudRefacciones')) ? $this->input->post('SolicitudRefacciones') : "",
 				'refaccionesact' => ($this->input->post('refaccionesact')) ? $this->input->post('refaccionesact') : "",
 				'TotalRefacciones' => ($this->input->post('TotalRefacciones')) ? $this->input->post('TotalRefacciones') : "",
 				'CantidadRefacciones' => ($this->input->post('CantidadRefacciones')) ? $this->input->post('CantidadRefacciones') : "",
-				'RefaccionesDispoiblesPorcentaje' => ($this->input->post('RefaccionesDispoiblesPorcentaje')) ? $this->input->post('RefaccionesDispoiblesPorcentaje') : "",
+				'refacciones_faltantes' => ($this->input->post('RefaccionesDispoiblesPorcentaje')) ? $this->input->post('RefaccionesDispoiblesPorcentaje') : "",
+				'RefaccionesDispoiblesPorcentaje' => "",
 				'UnidadProgRampa' => ($this->input->post('UnidadProgRampa')) ? $this->input->post('UnidadProgRampa') : "",
 				'ReparacionUnidadPorcentaje' => ($this->input->post('ReparacionUnidadPorcentaje')) ? $this->input->post('ReparacionUnidadPorcentaje') : "",
 				'Deducible' => ($this->input->post('Deducible')) ? $this->input->post('Deducible') : "",
 				'MontoDeducible' => ($this->input->post('MontoDeducible')) ? $this->input->post('MontoDeducible') : "",
 				'FechaEntrega' => ($this->input->post('FechaEntrega')) ? $this->input->post('FechaEntrega') : "",
+				'comentario_interno' => ($this->input->post('comentario_interno')) ? $this->input->post('comentario_interno') : "",
+				'comentario_externo' => ($this->input->post('comentario_externo')) ? $this->input->post('comentario_externo') : "",
 			];
-
 			
 			$save_reporte = $this->model_reporte->store($save_data);
 
@@ -186,6 +192,10 @@ class Reporte extends Admin
 		$this->form_validation->set_rules('modelo', 'Modelo', 'trim|required');
 		$this->form_validation->set_rules('ano', 'Año', 'trim|required');
 		$this->form_validation->set_rules('Valuacion', 'Valuacion', 'trim|required');
+		$this->form_validation->set_rules('perdida_total', 'Perdida Total', 'trim|required');
+		$this->form_validation->set_rules('pago_danos', 'Pago de Daños', 'trim|required');
+		$this->form_validation->set_rules('comentario_interno', 'Comentario Interno', 'trim');
+		$this->form_validation->set_rules('comentario_externo', 'Comentario Externo', 'trim');
 		
 		if ($this->form_validation->run()) {
 		
@@ -198,20 +208,24 @@ class Reporte extends Admin
 				'modelo' => $this->input->post('modelo'),
 				'ano' => $this->input->post('ano'),
 				'Valuacion' => $this->input->post('Valuacion'),
-				'PresupuestoEnviado' => $this->input->post('PresupuestoEnviado'),
-				'PresupuestoAceptado' => $this->input->post('PresupuestoAceptado'),
-				'SolicitudRefacciones' => $this->input->post('SolicitudRefacciones'),
-				'refaccionesact' => $this->input->post('refaccionesact'),
-				'TotalRefacciones' => $this->input->post('TotalRefacciones'),
-				'CantidadRefacciones' => $this->input->post('CantidadRefacciones'),
-				'RefaccionesDispoiblesPorcentaje' => $this->input->post('RefaccionesDispoiblesPorcentaje'),
-				'UnidadProgRampa' => $this->input->post('UnidadProgRampa'),
-				'ReparacionUnidadPorcentaje' => $this->input->post('ReparacionUnidadPorcentaje'),
-				'Deducible' => $this->input->post('Deducible'),
-				'MontoDeducible' => $this->input->post('MontoDeducible'),
-				'FechaEntrega' => $this->input->post('FechaEntrega'),
+				'perdida_total' => $this->input->post('perdida_total'),
+				'pago_danos' => $this->input->post('pago_danos'),
+				'PresupuestoEnviado' => ($this->input->post('PresupuestoEnviado')) ? $this->input->post('PresupuestoEnviado') : "",
+				'PresupuestoAceptado' => ($this->input->post('PresupuestoAceptado')) ? $this->input->post('PresupuestoAceptado') : "",
+				'SolicitudRefacciones' => ($this->input->post('SolicitudRefacciones')) ? $this->input->post('SolicitudRefacciones') : "",
+				'refaccionesact' => ($this->input->post('refaccionesact')) ? $this->input->post('refaccionesact') : "",
+				'TotalRefacciones' => ($this->input->post('TotalRefacciones')) ? $this->input->post('TotalRefacciones') : "",
+				'CantidadRefacciones' => ($this->input->post('CantidadRefacciones')) ? $this->input->post('CantidadRefacciones') : "",
+				'refacciones_faltantes' => ($this->input->post('RefaccionesDispoiblesPorcentaje')) ? $this->input->post('RefaccionesDispoiblesPorcentaje') : "",
+				'RefaccionesDispoiblesPorcentaje' => "",
+				'UnidadProgRampa' => ($this->input->post('UnidadProgRampa')) ? $this->input->post('UnidadProgRampa') : "",
+				'ReparacionUnidadPorcentaje' => ($this->input->post('ReparacionUnidadPorcentaje')) ? $this->input->post('ReparacionUnidadPorcentaje') : "",
+				'Deducible' => ($this->input->post('Deducible')) ? $this->input->post('Deducible') : "",
+				'MontoDeducible' => ($this->input->post('MontoDeducible')) ? $this->input->post('MontoDeducible') : "",
+				'FechaEntrega' => ($this->input->post('FechaEntrega')) ? $this->input->post('FechaEntrega') : "",
+				'comentario_interno' => ($this->input->post('comentario_interno')) ? $this->input->post('comentario_interno') : "",
+				'comentario_externo' => ($this->input->post('comentario_externo')) ? $this->input->post('comentario_externo') : "",
 			];
-
 			
 			$save_reporte = $this->model_reporte->change($id, $save_data);
 

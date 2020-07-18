@@ -157,6 +157,28 @@
                                 </small>
                             </div>
                         </div>
+
+                        <div class="form-group ">
+                            <label for="comentario_interno" class="col-sm-2 control-label">Comentario Interno 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="comentario_interno" id="comentario_interno" ><?= set_value('comentario_interno'); ?></textarea>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="comentario_externo" class="col-sm-2 control-label">Comentario Externo 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="comentario_externo" id="comentario_externo" ><?= set_value('comentario_externo'); ?></textarea>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
                                                  
                                                 <div class="form-group ">
                             <label for="Valuacion" class="col-sm-2 control-label">Valuacion 
@@ -177,6 +199,21 @@
                             </label>
                             <div class="col-sm-8">
                                 <select  class="form-control chosen chosen-select" name="perdida_total" id="perdida_total" data-placeholder="Seleccionar una opción" >
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
+                                </select>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="pago_danos" class="col-sm-2 control-label">Pago de Daños 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <select  class="form-control chosen chosen-select" name="pago_danos" id="pago_danos" data-placeholder="Seleccionar una opción" >
                                     <option value="">Seleccione una opción</option>
                                     <option value="SI">SI</option>
                                     <option value="NO">NO</option>
@@ -259,9 +296,22 @@
                             </div>
                         </div>
                                                  
+                        <div id="choosepass" class="form-group ">
+                            <label for="RefaccionesDispoiblesPorcentaje" class="col-sm-2 control-label">Refacciones Faltantes
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" name="RefaccionesDispoiblesPorcentaje" id="RefaccionesDispoiblesPorcentaje" placeholder="Refacciones Faltantes" value="<?= set_value('refacciones_faltantes'); ?>">
+                                <small class="info help-block">
+                                    <b>Refacciones Faltantes Calculadas</b>
+                                </small>
+                                
+                                <small style="color:#FF0000;" class="nosamepass">
+                                    <b>El porcentaje no coincide con el cálculo.</b>
+                                </small>
+                            </div>
+                        </div>
                         
-                        
-                                                <div id="choosepass" class="form-group ">
+                                                <!-- <div id="choosepass" class="form-group ">
                             <label for="RefaccionesDispoiblesPorcentaje" class="col-sm-2 control-label">Refacciones Disponibles % 
                             </label>
                             <div class="col-sm-8">
@@ -274,7 +324,7 @@
                                     <b>El porcentaje no coincide con el cálculo.</b>
                                 </small>
                             </div>
-                        </div>
+                        </div> -->
                         
                         
                         <div class="form-group conditional" data-cond-option="RefaccionesDispoiblesPorcentaje" data-cond-value="100" >
@@ -418,8 +468,6 @@
         var data_post = form_reporte.serializeArray();
         var save_type = $(this).attr('data-stype');
 
-        console.log(save_type);
-// return false;
         data_post.push({name: 'save_type', value: save_type});
     
         $('.loading').show();
@@ -461,7 +509,7 @@
       
        
  
-       $(function(){
+$(function(){
     
     $('#refaccionesact').on('input', function() {
       calculate();
@@ -472,23 +520,29 @@
     function calculate(){
         var pPos = parseInt($('#refaccionesact').val()); 
         var pEarned = parseInt($('#TotalRefacciones').val());
+        var refacFaltantes = "";
         var perc="";
         if(isNaN(pPos) || isNaN(pEarned)){
             perc=" ";
-           }else{
+            refacFaltantes = "";
+        }else{
            perc = ((pEarned/pPos) * 100).toFixed();
-           }
+           refacFaltantes = pPos-pEarned;
+        }
         
+        $('#RefaccionesDispoiblesPorcentaje').val(refacFaltantes);
+        $('.conditional').conditionize();
         $('#calculo').val(perc);
     }
 
 });
        
-        $("#RefaccionesDispoiblesPorcentaje").keyup(function() {
-  if ($("#calculo").val() != $("#RefaccionesDispoiblesPorcentaje").val()) {
-    $(".nosamepass").fadeIn('slow');
-    $("#choosepass > input").css("border", "5px solid #ff0033");
-  } else {
+$("#RefaccionesDispoiblesPorcentaje").keyup(function() {
+//   if ($("#calculo").val() != $("#RefaccionesDispoiblesPorcentaje").val()) {
+if ($("#RefaccionesDispoiblesPorcentaje").val() != 0) {
+//     $(".nosamepass").fadeIn('slow');
+//     $("#choosepass > input").css("border", "5px solid #ff0033");
+//   } else {
     $(".nosamepass").fadeOut('slow');
     $("#choosepass > input").css("border", "5px solid #232323");
   }
@@ -504,7 +558,8 @@
 (function($) {
     $("#perdida_total").change(function() {
         var perdidatotal = $(this).val();
-        if(perdidatotal == "SI") {
+        var pagodanos = $("#pago_danos").val();
+        if(perdidatotal == "SI" && pagodanos == "NO" || perdidatotal == "SI" && pagodanos == "") {
             $('#PresupuestoEnviado').prop("disabled", true);
             $('#PresupuestoEnviado').trigger('chosen:updated');
             $('#PresupuestoAceptado').prop("disabled", true);
@@ -520,7 +575,44 @@
             $('#Deducible').prop("disabled", true);
             $('#MontoDeducible').prop("disabled", true);
             $('#FechaEntrega').prop("disabled", true);
-        } else if(perdidatotal == "NO" || perdidatotal == "") {
+        } else if(perdidatotal == "NO" && pagodanos == "" || perdidatotal == "" && pagodanos == "") {
+            $('#PresupuestoEnviado').prop("disabled", false);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", false);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", false);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", false);
+            $('#TotalRefacciones').prop("disabled", false);
+            $('#calculo').prop("disabled", false);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", false);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", false);
+            $('#UnidadProgRampa').prop("disabled", false);
+            $('#Deducible').prop("disabled", false);
+            $('#MontoDeducible').prop("disabled", false);
+            $('#FechaEntrega').prop("disabled", false);
+        }
+    });
+    $("#pago_danos").change(function(){
+        var perdidatotal = $("#perdida_total").val();
+        var pagodanos = $(this).val();
+        if(pagodanos == "SI" && perdidatotal == "NO" || pagodanos == "SI" && perdidatotal == "") {
+            $('#PresupuestoEnviado').prop("disabled", true);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", true);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", true);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", true);
+            $('#TotalRefacciones').prop("disabled", true);
+            $('#calculo').prop("disabled", true);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", true);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", true);
+            $('#UnidadProgRampa').prop("disabled", true);
+            $('#Deducible').prop("disabled", true);
+            $('#MontoDeducible').prop("disabled", true);
+            $('#FechaEntrega').prop("disabled", true);
+        } else if(pagodanos == "NO" && perdidatotal == "NO" || pagodanos == "" && perdidatotal == "") {
             $('#PresupuestoEnviado').prop("disabled", false);
             $('#PresupuestoEnviado').trigger('chosen:updated');
             $('#PresupuestoAceptado').prop("disabled", false);
@@ -545,10 +637,12 @@
     }, options );
     
     $.fn.showOrHide = function(listenTo, listenFor, $section) {
-      if ($(listenTo).is('select, input[type=text]') && $(listenTo).val() == listenFor ) {
+        // console.log(listenTo +"=="+ listenFor);
+    //   if ($(listenTo).is('select, input[type=text]') && $(listenTo).val() == listenFor ) {
+      if ($(listenTo).is('select, input[type=text]') && $(listenTo).val() == "0" ) {
         $section.slideDown();
       }
-      else if ($(listenTo + ":checked").val() == listenFor) {
+      else if ($(listenTo + ":checked").val() == "0") {
         $section.slideDown();
       }
       else {

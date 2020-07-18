@@ -25,7 +25,11 @@ class Model_reporte extends MY_Model {
 		'ReparacionUnidadPorcentaje', 
 		'Deducible', 
 		'MontoDeducible', 
-		'FechaEntrega'
+		'FechaEntrega',
+		'comentario_externo',
+		'comentario_interno',
+		'pago_danos',
+		'refacciones_faltantes'
 	];
 
 	public function __construct()

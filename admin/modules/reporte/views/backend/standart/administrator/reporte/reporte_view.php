@@ -119,12 +119,44 @@ jQuery(document).ready(domo);
                            <?= _ent($reporte->ano); ?>
                         </div>
                     </div>
+
+                    <div class="form-group ">
+                        <label for="content" class="col-sm-2 control-label">Comentario Interno </label>
+
+                        <div class="col-sm-8">
+                           <?= _ent($reporte->comentario_interno); ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="content" class="col-sm-2 control-label">Comentario Externo </label>
+
+                        <div class="col-sm-8">
+                           <?= _ent($reporte->comentario_externo); ?>
+                        </div>
+                    </div>
                                          
                     <div class="form-group ">
                         <label for="content" class="col-sm-2 control-label">Valuacion </label>
 
                         <div class="col-sm-8">
                            <?= _ent($reporte->Valuacion); ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="content" class="col-sm-2 control-label">Perdida Total </label>
+
+                        <div class="col-sm-8">
+                           <?= _ent($reporte->perdida_total); ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="content" class="col-sm-2 control-label">Pago de Daños </label>
+
+                        <div class="col-sm-8">
+                           <?= _ent($reporte->pago_danos); ?>
                         </div>
                     </div>
                                          
@@ -169,10 +201,10 @@ jQuery(document).ready(domo);
                     </div>
                                          
                     <div class="form-group ">
-                        <label for="content" class="col-sm-2 control-label">Refacciones Disponibles % </label>
+                        <label for="content" class="col-sm-2 control-label">Refacciones Faltantes </label>
 
                         <div class="col-sm-8">
-                           <?= _ent($reporte->RefaccionesDispoiblesPorcentaje); ?>
+                           <?= _ent($reporte->refacciones_faltantes); ?>
                         </div>
                     </div>
                                          

@@ -76,6 +76,7 @@ class Persona extends Admin
 
 		$this->form_validation->set_rules('Nombre', 'Nombre', 'trim|required');
 		$this->form_validation->set_rules('Apellidos', 'Apellidos', 'trim|required');
+		$this->form_validation->set_rules('contacto', 'contacto', 'trim|required');
 		$this->form_validation->set_rules('Telefono', 'Telefono', 'trim|required');
 		$this->form_validation->set_rules('correo', 'Correo', 'trim|required');
 		$this->form_validation->set_rules('IdDireccion', 'IdDireccion', 'trim|required');

@@ -149,6 +149,28 @@
                                 </small>
                             </div>
                         </div>
+
+                        <div class="form-group ">
+                            <label for="comentario_interno" class="col-sm-2 control-label">Comentario Interno 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="comentario_interno" id="comentario_interno" ><?= set_value('comentario_interno'); ?></textarea>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="comentario_externo" class="col-sm-2 control-label">Comentario Externo 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="comentario_externo" id="comentario_externo" ><?= set_value('comentario_externo'); ?></textarea>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
                                                  
                                                 <div class="form-group ">
                             <label for="Valuacion" class="col-sm-2 control-label">Valuacion 
@@ -160,6 +182,35 @@
                                     <option value="SI">SI</option>
                                     <option value="NO">NO</option>
                                     </select>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="perdida_total" class="col-sm-2 control-label">Perdida Total 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <select  class="form-control chosen chosen-select" name="perdida_total" id="perdida_total" data-placeholder="Seleccionar una opción" >
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
+                                </select>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="pago_danos" class="col-sm-2 control-label">Pago de Daños 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <select  class="form-control chosen chosen-select" name="pago_danos" id="pago_danos" data-placeholder="Seleccionar una opción" >
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
+                                </select>
                                 <small class="info help-block">
                                 </small>
                             </div>
@@ -226,8 +277,21 @@
                                 </small>
                             </div>
                         </div>
-                                                 
-                                                <div class="form-group ">
+                        <div id="choosepass" class="form-group ">
+                            <label for="RefaccionesDispoiblesPorcentaje" class="col-sm-2 control-label">Refacciones Faltantes
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" name="RefaccionesDispoiblesPorcentaje" id="RefaccionesDispoiblesPorcentaje" placeholder="Refacciones Faltantes" value="<?= set_value('refacciones_faltantes'); ?>">
+                                <small class="info help-block">
+                                    <b>Refacciones Faltantes Calculadas</b>
+                                </small>
+                                
+                                <small style="color:#FF0000;" class="nosamepass">
+                                    <b>El porcentaje no coincide con el cálculo.</b>
+                                </small>
+                            </div>
+                        </div>                   
+                                                <!-- <div class="form-group ">
                             <label for="RefaccionesDispoiblesPorcentaje" class="col-sm-2 control-label">Refacciones Disponibles % 
                             </label>
                             <div class="col-sm-8">
@@ -235,7 +299,7 @@
                                 <small class="info help-block">
                                 <b>No podrás continuar si no se ha solicitado el 100% de las piezas.</b></small>
                             </div>
-                        </div>
+                        </div> -->
                                                  
                                                 <div class="form-group ">
                             <label for="UnidadProgRampa" class="col-sm-2 control-label">Unidad En Rampa 
@@ -396,26 +460,115 @@
       
        
  $(function(){
-    
+    $("#perdida_total").change(function() {
+        var perdidatotal = $(this).val();
+        var pagodanos = $("#pago_danos").val();
+        if(perdidatotal == "SI" && pagodanos == "NO" || perdidatotal == "SI" && pagodanos == "") {
+            $('#PresupuestoEnviado').prop("disabled", true);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", true);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", true);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", true);
+            $('#TotalRefacciones').prop("disabled", true);
+            $('#calculo').prop("disabled", true);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", true);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", true);
+            $('#UnidadProgRampa').prop("disabled", true);
+            $('#Deducible').prop("disabled", true);
+            $('#MontoDeducible').prop("disabled", true);
+            $('#FechaEntrega').prop("disabled", true);
+        } else if(perdidatotal == "NO" && pagodanos == "" || perdidatotal == "" && pagodanos == "") {
+            $('#PresupuestoEnviado').prop("disabled", false);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", false);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", false);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", false);
+            $('#TotalRefacciones').prop("disabled", false);
+            $('#calculo').prop("disabled", false);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", false);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", false);
+            $('#UnidadProgRampa').prop("disabled", false);
+            $('#Deducible').prop("disabled", false);
+            $('#MontoDeducible').prop("disabled", false);
+            $('#FechaEntrega').prop("disabled", false);
+        }
+    });
+    $("#pago_danos").change(function(){
+        var perdidatotal = $("#perdida_total").val();
+        var pagodanos = $(this).val();
+        if(pagodanos == "SI" && perdidatotal == "NO" || pagodanos == "SI" && perdidatotal == "") {
+            $('#PresupuestoEnviado').prop("disabled", true);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", true);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", true);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", true);
+            $('#TotalRefacciones').prop("disabled", true);
+            $('#calculo').prop("disabled", true);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", true);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", true);
+            $('#UnidadProgRampa').prop("disabled", true);
+            $('#Deducible').prop("disabled", true);
+            $('#MontoDeducible').prop("disabled", true);
+            $('#FechaEntrega').prop("disabled", true);
+        } else if(pagodanos == "NO" && perdidatotal == "NO" || pagodanos == "" && perdidatotal == "") {
+            $('#PresupuestoEnviado').prop("disabled", false);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", false);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", false);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", false);
+            $('#TotalRefacciones').prop("disabled", false);
+            $('#calculo').prop("disabled", false);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", false);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", false);
+            $('#UnidadProgRampa').prop("disabled", false);
+            $('#Deducible').prop("disabled", false);
+            $('#MontoDeducible').prop("disabled", false);
+            $('#FechaEntrega').prop("disabled", false);
+        }
+    });
     $('#refaccionesact').on('input', function() {
       calculate();
     });
     $('#TotalRefacciones').on('input', function() {
      calculate();
     });
+    // function calculate(){
+    //     var pPos = parseInt($('#refaccionesact').val()); 
+    //     var pEarned = parseInt($('#TotalRefacciones').val());
+    //     var perc="";
+    //     if(isNaN(pPos) || isNaN(pEarned)){
+    //         perc=" ";
+    //        }else{
+    //        perc = ((pEarned/pPos) * 100).toFixed(3);
+    //        }
+        
+    //     $('#RefaccionesDispoiblesPorcentaje').val(perc);
+    // }
     function calculate(){
         var pPos = parseInt($('#refaccionesact').val()); 
         var pEarned = parseInt($('#TotalRefacciones').val());
+        var refacFaltantes = "";
         var perc="";
         if(isNaN(pPos) || isNaN(pEarned)){
             perc=" ";
-           }else{
-           perc = ((pEarned/pPos) * 100).toFixed(3);
-           }
+            refacFaltantes = "";
+        }else{
+           perc = ((pEarned/pPos) * 100).toFixed();
+           refacFaltantes = pPos-pEarned;
+        }
         
-        $('#RefaccionesDispoiblesPorcentaje').val(perc);
+        $('#RefaccionesDispoiblesPorcentaje').val(refacFaltantes);
+        $('.conditional').conditionize();
+        $('#calculo').val(perc);
     }
-
 });
        
        

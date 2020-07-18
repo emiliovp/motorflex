@@ -1,5 +1,10 @@
-
 <script src="<?= BASE_ASSET; ?>/js/jquery.hotkeys.js"></script>
+<style type="text/css">
+.nosamepass {
+  display: none;
+}
+
+</style>
 <script type="text/javascript">
     function domo(){
      
@@ -23,6 +28,17 @@
     
     jQuery(document).ready(domo);
 </script>
+<!-- script php -->
+<?php
+    $disabled = "";
+    if(
+        $reporte->perdida_total == "SI" ||
+        $reporte->pago_danos == "SI"
+    ) {
+        $disabled = "disabled";
+    }
+?>
+<!-- Fin script php -->
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
@@ -149,6 +165,28 @@
                                 </small>
                             </div>
                         </div>
+
+                        <div class="form-group ">
+                            <label for="comentario_interno" class="col-sm-2 control-label">Comentario Interno 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="comentario_interno" id="comentario_interno" ><?= set_value('comentario_interno', $reporte->comentario_interno); ?></textarea>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="comentario_externo" class="col-sm-2 control-label">Comentario Externo 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="comentario_externo" id="comentario_externo" ><?= set_value('comentario_externo', $reporte->comentario_externo); ?></textarea>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
                                                  
                                                 <div class="form-group ">
                             <label for="Valuacion" class="col-sm-2 control-label">Valuacion 
@@ -164,12 +202,45 @@
                                 </small>
                             </div>
                         </div>
+
+                        <div class="form-group ">
+                            <label for="perdida_total" class="col-sm-2 control-label">Perdida Total 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <select  class="form-control chosen chosen-select" name="perdida_total" id="perdida_total" data-placeholder="Seleccionar una opción" >
+                                    <option value="">Seleccione una opción</option>
+                                    <!-- <option value="SI">SI</option>
+                                    <option value="NO">NO</option> -->
+                                    <option <?= $reporte->perdida_total == "SI" ? 'selected' :''; ?> value="SI">SI</option>
+                                    <option <?= $reporte->perdida_total == "NO" ? 'selected' :''; ?> value="NO">NO</option>
+                                </select>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="pago_danos" class="col-sm-2 control-label">Pago de Daños 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <select  class="form-control chosen chosen-select" name="pago_danos" id="pago_danos" data-placeholder="Seleccionar una opción" >
+                                    <option value="">Seleccione una opción</option>
+                                    <option <?= $reporte->pago_danos == "SI" ? 'selected' :''; ?> value="SI">SI</option>
+                                    <option <?= $reporte->pago_danos == "NO" ? 'selected' :''; ?> value="NO">NO</option>
+                                </select>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
+
                                                  
                                                 <div class="form-group ">
                             <label for="PresupuestoEnviado" class="col-sm-2 control-label">Presupuesto Enviado 
                             </label>
                             <div class="col-sm-8">
-                                <select  class="form-control chosen chosen-select" name="PresupuestoEnviado" id="PresupuestoEnviado" data-placeholder="Select PresupuestoEnviado" >
+                                <select <?= $disabled; ?> class="form-control chosen chosen-select" name="PresupuestoEnviado" id="PresupuestoEnviado" data-placeholder="Select PresupuestoEnviado" >
                                     <option value=""></option>
                                     <option <?= $reporte->PresupuestoEnviado == "SI" ? 'selected' :''; ?> value="SI">SI</option>
                                     <option <?= $reporte->PresupuestoEnviado == "NO" ? 'selected' :''; ?> value="NO">NO</option>
@@ -183,7 +254,7 @@
                             <label for="PresupuestoAceptado" class="col-sm-2 control-label">Presupuesto Aceptado 
                             </label>
                             <div class="col-sm-8">
-                                <select  class="form-control chosen chosen-select" name="PresupuestoAceptado" id="PresupuestoAceptado" data-placeholder="Select PresupuestoAceptado" >
+                                <select <?= $disabled; ?> class="form-control chosen chosen-select" name="PresupuestoAceptado" id="PresupuestoAceptado" data-placeholder="Select PresupuestoAceptado" >
                                     <option value=""></option>
                                     <option <?= $reporte->PresupuestoAceptado == "SI" ? 'selected' :''; ?> value="SI">SI</option>
                                     <option <?= $reporte->PresupuestoAceptado == "NO" ? 'selected' :''; ?> value="NO">NO</option>
@@ -197,7 +268,7 @@
                             <label for="SolicitudRefacciones" class="col-sm-2 control-label">Solicitud De Refacciones 
                             </label>
                             <div class="col-sm-8">
-                                <select  class="form-control chosen chosen-select" name="SolicitudRefacciones" id="SolicitudRefacciones" data-placeholder="Select SolicitudRefacciones" >
+                                <select <?= $disabled; ?> class="form-control chosen chosen-select" name="SolicitudRefacciones" id="SolicitudRefacciones" data-placeholder="Select SolicitudRefacciones" >
                                     <option value=""></option>
                                     <option <?= $reporte->SolicitudRefacciones == "SI" ? 'selected' :''; ?> value="SI">SI</option>
                                     <option <?= $reporte->SolicitudRefacciones == "NO" ? 'selected' :''; ?> value="NO">NO</option>
@@ -211,7 +282,7 @@
                             <label for="refaccionesact" class="col-sm-2 control-label">Refacciones Necesarias 
                             </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="refaccionesact" id="refaccionesact" placeholder="Refacciones Necesarias" value="<?= set_value('refaccionesact', $reporte->refaccionesact); ?>">
+                                <input <?= $disabled; ?> type="text" class="form-control" name="refaccionesact" id="refaccionesact" placeholder="Refacciones Necesarias" value="<?= set_value('refaccionesact', $reporte->refaccionesact); ?>">
                                 <small class="info help-block">
                                 </small>
                             </div>
@@ -221,7 +292,7 @@
                             <label for="TotalRefacciones" class="col-sm-2 control-label">Refacciones Conseguidas 
                             </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="TotalRefacciones" id="TotalRefacciones" placeholder="Refacciones Conseguidas" value="<?= set_value('TotalRefacciones', $reporte->TotalRefacciones); ?>">
+                                <input <?= $disabled; ?> type="text" class="form-control" name="TotalRefacciones" id="TotalRefacciones" placeholder="Refacciones Conseguidas" value="<?= set_value('TotalRefacciones', $reporte->TotalRefacciones); ?>">
                                 <small class="info help-block">
                                 </small>
                             </div>
@@ -231,22 +302,35 @@
                             <label for="CantidadRefacciones" class="col-sm-2 control-label">Cálculo Refacciones Disponibles  
                             </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="CantidadRefacciones" id="calculo" placeholder="Cálculo Refacciones Disponibles " value="<?= set_value('CantidadRefacciones', $reporte->CantidadRefacciones); ?>">
+                                <input <?= $disabled; ?> type="text" class="form-control" name="CantidadRefacciones" id="calculo" placeholder="Cálculo Refacciones Disponibles " value="<?= set_value('CantidadRefacciones', $reporte->CantidadRefacciones); ?>">
                                 <small class="info help-block">
                                 </small>
                             </div>
                         </div>
-                                                 
-                                                <div class="form-group ">
+                        <div id="choosepass" class="form-group ">
+                            <label for="RefaccionesDispoiblesPorcentaje" class="col-sm-2 control-label">Refacciones Faltantes
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" name="RefaccionesDispoiblesPorcentaje" id="RefaccionesDispoiblesPorcentaje" placeholder="Refacciones Faltantes" value="<?= set_value('refacciones_faltantes', $reporte->refacciones_faltantes); ?>">
+                                <small class="info help-block">
+                                    <b>Refacciones Faltantes Calculadas</b>
+                                </small>
+                                
+                                <small style="color:#FF0000;" class="nosamepass">
+                                    <b>El porcentaje no coincide con el cálculo.</b>
+                                </small>
+                            </div>
+                        </div>
+                                                <!-- <div class="form-group ">
                             <label for="RefaccionesDispoiblesPorcentaje" class="col-sm-2 control-label">Refacciones Disponibles % 
                             </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="RefaccionesDispoiblesPorcentaje" id="RefaccionesDispoiblesPorcentaje" placeholder="Refacciones Disponibles %" value="<?= set_value('RefaccionesDispoiblesPorcentaje', $reporte->RefaccionesDispoiblesPorcentaje); ?>">
+                                <input <?= $disabled; ?> type="text" class="form-control" name="RefaccionesDispoiblesPorcentaje" id="RefaccionesDispoiblesPorcentaje" placeholder="Refacciones Disponibles %" value="<?= set_value('RefaccionesDispoiblesPorcentaje', $reporte->RefaccionesDispoiblesPorcentaje); ?>">
                                 <small class="info help-block">
                                     <b>Confirma el porcentaje calculado</b>
                                 </small>
                             </div>
-                        </div>
+                        </div> -->
                         
                         
                         <div class="form-group conditional" data-cond-option="RefaccionesDispoiblesPorcentaje" data-cond-value="100">
@@ -419,23 +503,113 @@
       
        
         $(function(){
-    
+            $("#perdida_total").change(function() {
+        var perdidatotal = $(this).val();
+        var pagodanos = $("#pago_danos").val();
+        if(perdidatotal == "SI" && pagodanos == "NO" || perdidatotal == "SI" && pagodanos == "") {
+            $('#PresupuestoEnviado').prop("disabled", true);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", true);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", true);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", true);
+            $('#TotalRefacciones').prop("disabled", true);
+            $('#calculo').prop("disabled", true);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", true);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", true);
+            $('#UnidadProgRampa').prop("disabled", true);
+            $('#Deducible').prop("disabled", true);
+            $('#MontoDeducible').prop("disabled", true);
+            $('#FechaEntrega').prop("disabled", true);
+        } else if(perdidatotal == "NO" && pagodanos == "" || perdidatotal == "" && pagodanos == "") {
+            $('#PresupuestoEnviado').prop("disabled", false);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", false);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", false);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", false);
+            $('#TotalRefacciones').prop("disabled", false);
+            $('#calculo').prop("disabled", false);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", false);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", false);
+            $('#UnidadProgRampa').prop("disabled", false);
+            $('#Deducible').prop("disabled", false);
+            $('#MontoDeducible').prop("disabled", false);
+            $('#FechaEntrega').prop("disabled", false);
+        }
+    });
+    $("#pago_danos").change(function(){
+        var perdidatotal = $("#perdida_total").val();
+        var pagodanos = $(this).val();
+        if(pagodanos == "SI" && perdidatotal == "NO" || pagodanos == "SI" && perdidatotal == "") {
+            $('#PresupuestoEnviado').prop("disabled", true);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", true);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", true);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", true);
+            $('#TotalRefacciones').prop("disabled", true);
+            $('#calculo').prop("disabled", true);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", true);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", true);
+            $('#UnidadProgRampa').prop("disabled", true);
+            $('#Deducible').prop("disabled", true);
+            $('#MontoDeducible').prop("disabled", true);
+            $('#FechaEntrega').prop("disabled", true);
+        } else if(pagodanos == "NO" && perdidatotal == "NO" || pagodanos == "" && perdidatotal == "") {
+            $('#PresupuestoEnviado').prop("disabled", false);
+            $('#PresupuestoEnviado').trigger('chosen:updated');
+            $('#PresupuestoAceptado').prop("disabled", false);
+            $('#PresupuestoAceptado').trigger('chosen:updated');
+            $('#SolicitudRefacciones').prop("disabled", false);
+            $('#SolicitudRefacciones').trigger('chosen:updated');
+            $('#refaccionesact').prop("disabled", false);
+            $('#TotalRefacciones').prop("disabled", false);
+            $('#calculo').prop("disabled", false);
+            $('#RefaccionesDispoiblesPorcentaje').prop("disabled", false);
+            $('#ReparacionUnidadPorcentaje').prop("disabled", false);
+            $('#UnidadProgRampa').prop("disabled", false);
+            $('#Deducible').prop("disabled", false);
+            $('#MontoDeducible').prop("disabled", false);
+            $('#FechaEntrega').prop("disabled", false);
+        }
+    });
     $('#refaccionesact').on('input', function() {
       calculate();
     });
     $('#TotalRefacciones').on('input', function() {
      calculate();
     });
+    // function calculate(){
+    //     var pPos = parseInt($('#refaccionesact').val()); 
+    //     var pEarned = parseInt($('#TotalRefacciones').val());
+    //     var perc="";
+    //     if(isNaN(pPos) || isNaN(pEarned)){
+    //         perc=" ";
+    //        }else{
+    //        perc = ((pEarned/pPos) * 100).toFixed();
+    //        }
+        
+    //     $('#calculo').val(perc);
+    // }
     function calculate(){
         var pPos = parseInt($('#refaccionesact').val()); 
         var pEarned = parseInt($('#TotalRefacciones').val());
+        var refacFaltantes = "";
         var perc="";
         if(isNaN(pPos) || isNaN(pEarned)){
             perc=" ";
-           }else{
+            refacFaltantes = "";
+        }else{
            perc = ((pEarned/pPos) * 100).toFixed();
-           }
+           refacFaltantes = pPos-pEarned;
+        }
         
+        $('#RefaccionesDispoiblesPorcentaje').val(refacFaltantes);
+        $('.conditional').conditionize();
         $('#calculo').val(perc);
     }
 
@@ -457,10 +631,12 @@
     }, options );
     
     $.fn.showOrHide = function(listenTo, listenFor, $section) {
-      if ($(listenTo).is('select, input[type=text]') && $(listenTo).val() == listenFor ) {
+    //   if ($(listenTo).is('select, input[type=text]') && $(listenTo).val() == listenFor ) {
+      if ($(listenTo).is('select, input[type=text]') && $(listenTo).val() == "0" ) {
         $section.slideDown();
       }
-      else if ($(listenTo + ":checked").val() == listenFor) {
+    //   else if ($(listenTo + ":checked").val() == listenFor) {
+      else if ($(listenTo + ":checked").val() == "0") {
         $section.slideDown();
       }
       else {

@@ -5,7 +5,7 @@ class Model_persona extends MY_Model {
 
 	private $primary_key 	= 'IdPersona';
 	private $table_name 	= 'persona';
-	private $field_search 	= ['Nombre', 'Apellidos', 'alcaldia', 'cp', 'colonia', 'calle', 'numero', 'Telefono', 'correo', 'RFC', 'IdDireccion', 'cumpl'];
+	private $field_search 	= ['Nombre', 'Apellidos', 'contacto', 'alcaldia', 'cp', 'colonia', 'calle', 'numero', 'Telefono', 'correo', 'RFC', 'IdDireccion', 'cumpl'];
 
 	public function __construct()
 	{

@@ -18,9 +18,9 @@ $salida="";
 
 //valida si el numero de reporte ya se encuentra registrado
 
-$vreporte = select('NumeroReporte,FechaIngreso,Valuacion,PresupuestoEnviado,PresupuestoAceptado,'
+$vreporte = select('comentario_externo,NumeroReporte,FechaIngreso,Valuacion,PresupuestoEnviado,PresupuestoAceptado,'
 
-        . 'SolicitudRefacciones,RefaccionesDispoiblesPorcentaje,ReparacionUnidadPorcentaje,'
+        . 'SolicitudRefacciones,refacciones_faltantes,ReparacionUnidadPorcentaje,'
 
         . 'UnidadProgRampa,Deducible,MontoDeducible,FechaEntrega', 'reporte', 'NumeroReporte=\''.$nreporte.'\'');
 
@@ -32,17 +32,17 @@ if (num($vreporte)>0){
 
     
 
-    $salida.="<table class='rwd-table'> <tbody><tr><th>Reporte</th><th>Fecha de Ingreso</th><th>Valuación</th><th>Presupuesto Enviado</th>"
+    $salida.="<table class='tablaClienteReporte col-lg-12'> <thead class='thead-yellow'><tr><th>Reporte</th><th>Fecha de Ingreso</th><th>Valuación</th><th>Presupuesto Enviado</th>"
 
-            . "<th>Presupuesto Aceptado</th><th>Solicitud Refacciones</th><th>Refacciones Disponibles %</th>"
+            . "<th>Presupuesto Aceptado</th><th>Solicitud Refacciones</th><th>Refacciones faltantes</th>"
 
-            . "<th>Unidad en Rampa</th><th>Reparación Unidad %</th><th>Deducible</th><th>Monto Deducible</th><th>Fecha de Entrega</th></tr>";
+            . "<th>Unidad en Rampa</th><th>Reparación Unidad %</th><th>Deducible</th><th>Monto Deducible</th><th>Fecha de Entrega</th></tr></thead>";
 
-    
+    $comentarioExterno = "";
 
     while($fila=$vreporte->fetch_assoc()){
 
-        $salida.="<tr>"
+        $salida.="<tbody class='tbody-gris'><tr>"
 
                 . "<td data-th='Número de reporte'>".$fila['NumeroReporte']."</td>"
 
@@ -56,7 +56,7 @@ if (num($vreporte)>0){
 
                 ."<td data-th='Solicitud de refacciones'>".$fila['SolicitudRefacciones']."</td>"
 
-                ."<td data-th='Refacciones disponibles %'>".$fila['RefaccionesDispoiblesPorcentaje']."%</td>"
+                ."<td data-th='Refacciones faltantes'>".$fila['refacciones_faltantes']."</td>"
 
                 ."<td data-th='En rampa'>".$fila['UnidadProgRampa']."</td>"
 
@@ -69,12 +69,13 @@ if (num($vreporte)>0){
                 ."<td data-th='Fecha de entrega'>".$fila['FechaEntrega']."</td>"
 
                 . "</tr>";
-
+                $comentarioExterno = $fila["comentario_externo"];
     }
 
     $salida.="</tbody></table>";
-
     
+    // rwd-table
+    $salida .= "<br><table class='tablaClienteReporte col-lg-12'><thead class='thead-yellow'><tr><th style='text-align:left;'>Comentarios</th></tr></thead><tbody class='tbody-gris'><tr><td data-th='Comentarios' style='text-align:left;'>".$comentarioExterno."</td></tr></tbody></table>";
 
 }else{
 

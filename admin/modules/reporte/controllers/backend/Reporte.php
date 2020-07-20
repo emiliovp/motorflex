@@ -30,13 +30,25 @@ class Reporte extends Admin
 
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
-
-		$this->data['reportes'] = $this->model_reporte->get($filter, $field, $this->limit_page, $offset);
-		$this->data['reporte_counts'] = $this->model_reporte->count_all($filter, $field);
-
+		//echo $field;
+		//die();
+		if (isset($field)) {
+			$this->data['reportes'] = $this->model_reporte->search($filter, $field, $contar = null, $this->limit_page, $offset);
+			$this->data['reporte_counts'] = $this->model_reporte->search($filter, $field, $contar = 1, $this->limit_page, $offset);
+			if ($field == 'todo') {
+				$count = $this->model_reporte->count_all($filter, $field);
+				$this->data['reporte_counts'] = $count;
+			}else{
+				$count = $this->model_reporte->search($filter, $field, $contar = 1, $this->limit_page, $offset);
+			}
+		}else{
+			$this->data['reportes'] = $this->model_reporte->get($filter, $field, $this->limit_page, $offset);
+			$this->data['reporte_counts'] = $this->model_reporte->count_all($filter, $field);
+			$count = $this->model_reporte->count_all($filter, $field);
+		}
 		$config = [
 			'base_url'     => 'administrator/reporte/index/',
-			'total_rows'   => $this->model_reporte->count_all($filter, $field),
+			'total_rows'   => $count,
 			'per_page'     => $this->limit_page,
 			'uri_segment'  => 4,
 		];

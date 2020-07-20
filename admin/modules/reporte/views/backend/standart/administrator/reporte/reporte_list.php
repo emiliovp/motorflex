@@ -188,26 +188,26 @@ jQuery(document).ready(domo);
                      </div>
                      <div class="col-sm-3 padd-left-0 " >
                         <select type="text" class="form-control chosen chosen-select" name="f" id="field" >
-                           <option value=""><?= cclang('all'); ?></option>
-                            <option <?= $this->input->get('f') == 'NumeroReporte' ? 'selected' :''; ?> value="NumeroReporte">NumeroReporte</option>
+                           <option value="todo"><?= cclang('all'); ?></option>
+                            <option <?= $this->input->get('f') == 'NumeroReporte' ? 'selected' :''; ?> value="NumeroReporte">Numero Reporte</option>
                            <option <?= $this->input->get('f') == 'cliente' ? 'selected' :''; ?> value="cliente">Cliente</option>
-                           <option <?= $this->input->get('f') == 'fechaingreso' ? 'selected' :''; ?> value="fechaingreso">Fechaingreso</option>
+                           <option <?= $this->input->get('f') == 'fechaingreso' ? 'selected' :''; ?> value="fechaingreso">Fecha ingreso</option>
                            <option <?= $this->input->get('f') == 'orden' ? 'selected' :''; ?> value="orden">Orden</option>
                            <option <?= $this->input->get('f') == 'marca' ? 'selected' :''; ?> value="marca">Marca</option>
                            <option <?= $this->input->get('f') == 'modelo' ? 'selected' :''; ?> value="modelo">Modelo</option>
                            <option <?= $this->input->get('f') == 'ano' ? 'selected' :''; ?> value="ano">Ano</option>
                            <option <?= $this->input->get('f') == 'Valuacion' ? 'selected' :''; ?> value="Valuacion">Valuacion</option>
-                           <option <?= $this->input->get('f') == 'PresupuestoEnviado' ? 'selected' :''; ?> value="PresupuestoEnviado">PresupuestoEnviado</option>
-                           <option <?= $this->input->get('f') == 'PresupuestoAceptado' ? 'selected' :''; ?> value="PresupuestoAceptado">PresupuestoAceptado</option>
-                           <option <?= $this->input->get('f') == 'SolicitudRefacciones' ? 'selected' :''; ?> value="SolicitudRefacciones">SolicitudRefacciones</option>
+                           <option <?= $this->input->get('f') == 'PresupuestoEnviado' ? 'selected' :''; ?> value="PresupuestoEnviado">Presupuesto Enviado</option>
+                           <option <?= $this->input->get('f') == 'PresupuestoAceptado' ? 'selected' :''; ?> value="PresupuestoAceptado">Presupuesto Aceptado</option>
+                           <option <?= $this->input->get('f') == 'SolicitudRefacciones' ? 'selected' :''; ?> value="SolicitudRefacciones">Solicitud Refacciones</option>
                            <option <?= $this->input->get('f') == 'refaccionesact' ? 'selected' :''; ?> value="refaccionesact">Refaccionesact</option>
-                           <option <?= $this->input->get('f') == 'TotalRefacciones' ? 'selected' :''; ?> value="TotalRefacciones">TotalRefacciones</option>
+                           <option <?= $this->input->get('f') == 'TotalRefacciones' ? 'selected' :''; ?> value="TotalRefacciones">Total Refacciones</option>
                            <option <?= $this->input->get('f') == 'RefaccionesDispoiblesPorcentaje' ? 'selected' :''; ?> value="RefaccionesDispoiblesPorcentaje">RefaccionesDispoiblesPorcentaje</option>
-                           <option <?= $this->input->get('f') == 'UnidadProgRampa' ? 'selected' :''; ?> value="UnidadProgRampa">UnidadProgRampa</option>
+                           <option <?= $this->input->get('f') == 'UnidadProgRampa' ? 'selected' :''; ?> value="UnidadProgRampa">Unidad Prog Rampa</option>
                            <option <?= $this->input->get('f') == 'ReparacionUnidadPorcentaje' ? 'selected' :''; ?> value="ReparacionUnidadPorcentaje">ReparacionUnidadPorcentaje</option>
                            <option <?= $this->input->get('f') == 'Deducible' ? 'selected' :''; ?> value="Deducible">Deducible</option>
-                           <option <?= $this->input->get('f') == 'MontoDeducible' ? 'selected' :''; ?> value="MontoDeducible">MontoDeducible</option>
-                           <option <?= $this->input->get('f') == 'FechaEntrega' ? 'selected' :''; ?> value="FechaEntrega">FechaEntrega</option>
+                           <option <?= $this->input->get('f') == 'MontoDeducible' ? 'selected' :''; ?> value="MontoDeducible">Monto Deducible</option>
+                           <option <?= $this->input->get('f') == 'FechaEntrega' ? 'selected' :''; ?> value="FechaEntrega">Fecha Entrega</option>
                           </select>
                      </div>
                      <div class="col-sm-1 padd-left-0 ">

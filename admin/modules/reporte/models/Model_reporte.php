@@ -47,25 +47,7 @@ class Model_reporte extends MY_Model {
 	{
 		$iterasi = 1;
         $num = count($this->field_search);
-        $where = NULL;
-        $q = $this->scurity($q);
-		$field = $this->scurity($field);
-
-        if (empty($field)) {
-	        foreach ($this->field_search as $field) {
-	            if ($iterasi == 1) {
-	                $where .= "reporte.".$field . " LIKE '%" . $q . "%' ";
-	            } else {
-	                $where .= "OR " . "reporte.".$field . " LIKE '%" . $q . "%' ";
-	            }
-	            $iterasi++;
-	        }
-
-	        $where = '('.$where.')';
-        } else {
-        	$where .= "(" . "reporte.".$field . " LIKE '%" . $q . "%' )";
-        }
-
+		$where = ("reporte.estatus_reporte = 1");
 		$this->join_avaiable()->filter_avaiable();
         $this->db->where($where);
 		$query = $this->db->get($this->table_name);
@@ -81,27 +63,8 @@ class Model_reporte extends MY_Model {
         $q = $this->scurity($q);
 		$field = $this->scurity($field);
 		$and = ("reporte.estatus_reporte = 1");
-        if (empty($field)) {
-	        foreach ($this->field_search as $field) {
-	            if ($iterasi == 1) {
-	                $where .= "reporte.".$field . " LIKE '%" . $q . "%' ";
-	            } else {
-	                $where .= "OR " . "reporte.".$field . " LIKE '%" . $q . "%' ";
-	            }
-	            $iterasi++;
-	        }
-
-	        $where = '('.$where.')';
-        } else {
-        	$where .= "(" . "reporte.".$field . " LIKE '%" . $q . "%' )";
-        }
-
-        if (is_array($select_field) AND count($select_field)) {
-        	$this->db->select($select_field);
-        }
-		
 		$this->join_avaiable()->filter_avaiable();
-		$this->db->where($where);
+		//$this->db->where($where);
 		$this->db->where($and);
         $this->db->limit($limit, $offset);
         $this->db->order_by('reporte.'.$this->primary_key, "DESC");
@@ -109,7 +72,42 @@ class Model_reporte extends MY_Model {
 
 		return $query->result();
 	}
+	public function search($q = null, $field = null, $contar = null, $limit = 0, $offset = 0, $select_field = []){
+        $where = NULL;
+        $q = $this->scurity($q);
+		$field = $this->scurity($field);
+		switch ($field) {
+			case 'cliente':
+				$field = 'if(persona.Apellidos = persona.Nombre, `persona`.`Nombre`, concat(persona.Apellidos, " ", persona.Nombre))';
+				$where .= "(".$field . " LIKE '%" . $q . "%' )";
+				break;
+			case 'marca':
+				$field = 'cat_marca.Descripcion';
+				$where .= "(".$field . " LIKE '%" . $q . "%' )";
+				break;
+			case 'todo':
+				$where = "1=1";
+				break;
+			default:
+				$where .= "(" . "reporte.".$field . " LIKE '%" . $q . "%' )";
+				break;
+		}
+		$and = ("reporte.estatus_reporte = 1");
+		$this->join_avaiable()->filter_avaiable();
+		$this->db->where($where);
+		$this->db->where($and);
+        $this->db->limit($limit, $offset);
+        $this->db->order_by('reporte.'.$this->primary_key, "DESC");
+		$query = $this->db->get($this->table_name);
+		if ($contar == null) {
+			return $query->result();
+		}else{
+			return $query->num_rows();
+		}
+	}
+	public function count_search(){
 
+	}
     public function join_avaiable() {
         $this->db->join('persona', 'persona.IdPersona = reporte.cliente', 'LEFT');
         $this->db->join('cat_marca', 'cat_marca.IdMarca = reporte.marca', 'LEFT');

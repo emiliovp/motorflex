@@ -169,7 +169,7 @@ jQuery(document).ready(domo);
                     </div>
                                          
                     <div class="form-group ">
-                        <label for="content" class="col-sm-2 control-label">Presupuesto Aceptado </label>
+                        <label for="content" class="col-sm-2 control-label">Valuación Autorizada </label>
 
                         <div class="col-sm-8">
                            <?= _ent($reporte->PresupuestoAceptado); ?>

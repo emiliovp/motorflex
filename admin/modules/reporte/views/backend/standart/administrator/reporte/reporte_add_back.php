@@ -231,7 +231,7 @@
                         </div>
                                                  
                                                 <div class="form-group ">
-                            <label for="PresupuestoAceptado" class="col-sm-2 control-label">Presupuesto Aceptado 
+                            <label for="PresupuestoAceptado" class="col-sm-2 control-label">Valuación Autorizada 
                             </label>
                             <div class="col-sm-8">
                                 <select  class="form-control chosen chosen-select" name="PresupuestoAceptado" id="PresupuestoAceptado" data-placeholder="Select PresupuestoAceptado" >

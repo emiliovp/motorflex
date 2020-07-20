@@ -75,6 +75,21 @@
                             'method'  => 'POST'
                             ]); ?>
                          
+
+                         <div class="form-group ">
+                            <label for="estatus" class="col-sm-2 control-label">Estatus 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <select  class="form-control chosen chosen-select" name="estatus" id="estatus" data-placeholder="Select estatus" >
+                                    <option value=""></option>
+                                    <option <?= $reporte->estatus == "SI" ? 'selected' :''; ?> value="2">En proceso</option>
+                                    <option <?= $reporte->estatus == "NO" ? 'selected' :''; ?> value="3">Cerrado</option>
+                                    </select>
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
                                                 <div class="form-group ">
                             <label for="NumeroReporte" class="col-sm-2 control-label">Número De Reporte 
                             <i class="required">*</i>
@@ -251,7 +266,7 @@
                         </div>
                                                  
                                                 <div class="form-group ">
-                            <label for="PresupuestoAceptado" class="col-sm-2 control-label">Presupuesto Aceptado 
+                            <label for="PresupuestoAceptado" class="col-sm-2 control-label">Valuación Autorizada 
                             </label>
                             <div class="col-sm-8">
                                 <select <?= $disabled; ?> class="form-control chosen chosen-select" name="PresupuestoAceptado" id="PresupuestoAceptado" data-placeholder="Select PresupuestoAceptado" >

@@ -91,7 +91,7 @@ jQuery(document).ready(domo);
                            <th>Valuacion</th>
                            <th>Perdida Total</th>
                            <th>Presupuesto Enviado</th>
-                           <th>Presupuesto Aceptado</th>
+                           <th>Valuación Autorizada</th>
                            <th>Solicitud De Refacciones</th>
                            <th>Refacciones Necesarias</th>
                            <th>Refacciones Conseguidas</th>

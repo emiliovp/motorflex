@@ -281,3 +281,5 @@ $lang['btn_deactivation'] = 'Inactivation';
 $lang['has_been_inactived'] = '$1 inactivated';
 $lang['has_been_actived'] = '$1 activated';
 
+//Triada
+$lang['list_dias_reparacion'] = 'Repair days report $1';

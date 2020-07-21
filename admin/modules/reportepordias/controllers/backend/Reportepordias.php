@@ -9,14 +9,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 *| Reporte site
 *|
 */
-class Reporte extends Admin	
+class Reportepordias extends Admin	
 {
 	
 	public function __construct()
 	{
 		parent::__construct();
 
-		$this->load->model('model_reporte');
+		$this->load->model('model_reporte_dias');
 	}
 
 	/**
@@ -30,24 +30,23 @@ class Reporte extends Admin
 
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
-		//echo $field;
-		//die();
+
 		if (isset($field)) {
-			$this->data['reportes'] = $this->model_reporte->search($filter, $field, $contar = null, $this->limit_page, $offset);
-			$this->data['reporte_counts'] = $this->model_reporte->search($filter, $field, $contar = 1, $this->limit_page, $offset);
+			$this->data['reportes'] = $this->model_reporte_dias->search($filter, $field, $contar = null, $this->limit_page, $offset);
+			$this->data['reporte_counts'] = $this->model_reporte_dias->search($filter, $field, $contar = 1, $this->limit_page, $offset);
 			if ($field == 'todo') {
-				$count = $this->model_reporte->count_all($filter, $field);
+				$count = $this->model_reporte_dias->count_all($filter, $field);
 				$this->data['reporte_counts'] = $count;
 			}else{
-				$count = $this->model_reporte->search($filter, $field, $contar = 1, $this->limit_page, $offset);
+				$count = $this->model_reporte_dias->search($filter, $field, $contar = 1, $this->limit_page, $offset);
 			}
 		}else{
-			$this->data['reportes'] = $this->model_reporte->get($filter, $field, $this->limit_page, $offset);
-			$this->data['reporte_counts'] = $this->model_reporte->count_all($filter, $field);
-			$count = $this->model_reporte->count_all($filter, $field);
+			$this->data['reportes'] = $this->model_reporte_dias->get($filter, $field, $this->limit_page, $offset);
+			$this->data['reporte_counts'] = $this->model_reporte_dias->count_all($filter, $field);
+			$count = $this->model_reporte_dias->count_all($filter, $field);
 		}
 		$config = [
-			'base_url'     => 'administrator/reporte/index/',
+			'base_url'     => 'administrator/reportepordias/index/',
 			'total_rows'   => $count,
 			'per_page'     => $this->limit_page,
 			'uri_segment'  => 4,
@@ -56,7 +55,7 @@ class Reporte extends Admin
 		$this->data['pagination'] = $this->pagination($config);
 
 		$this->template->title('Reporte List');
-		$this->render('backend/standart/administrator/reporte/reporte_list', $this->data);
+		$this->render('backend/standart/administrator/reportepordias/reporte_list', $this->data);
 	}
 	
 	/**
@@ -68,7 +67,7 @@ class Reporte extends Admin
 		$this->is_allowed('reporte_add');
 
 		$this->template->title('Reporte New');
-		$this->render('backend/standart/administrator/reporte/reporte_add', $this->data);
+		$this->render('backend/standart/administrator/reportepordias/reporte_add', $this->data);
 	}
 
 	/**
@@ -129,7 +128,7 @@ class Reporte extends Admin
 				'comentario_externo' => ($this->input->post('comentario_externo')) ? $this->input->post('comentario_externo') : "",
 			];
 			
-			$save_reporte = $this->model_reporte->store($save_data);
+			$save_reporte = $this->model_reporte_dias->store($save_data);
 
 			if ($save_reporte) {
 				if ($this->input->post('save_type') == 'stay') {
@@ -176,10 +175,10 @@ class Reporte extends Admin
 	{
 		$this->is_allowed('reporte_update');
 
-		$this->data['reporte'] = $this->model_reporte->find($id);
+		$this->data['reporte'] = $this->model_reporte_dias->find($id);
 
 		$this->template->title('Reporte Update');
-		$this->render('backend/standart/administrator/reporte/reporte_update', $this->data);
+		$this->render('backend/standart/administrator/reportepordias/reporte_update', $this->data);
 	}
 
 	/**
@@ -241,7 +240,7 @@ class Reporte extends Admin
 				'comentario_externo' => ($this->input->post('comentario_externo')) ? $this->input->post('comentario_externo') : "",
 			];
 			
-			$save_reporte = $this->model_reporte->change($id, $save_data);
+			$save_reporte = $this->model_reporte_dias->change($id, $save_data);
 
 			if ($save_reporte) {
 				if ($this->input->post('save_type') == 'stay') {
@@ -296,11 +295,11 @@ class Reporte extends Admin
 		];
 		if (isset($id)) {
 			// $remove = $this->_remove($id);
-			$remove = $this->model_reporte->change($id,$data);
+			$remove = $this->model_reporte_dias->change($id,$data);
 		} elseif (count($arr_id) >0) {
 			foreach ($arr_id as $id) {
 			// $remove = $this->_remove($id);
-			$remove = $this->model_reporte->change($id,$data);
+			$remove = $this->model_reporte_dias->change($id,$data);
 			}
 		}
 
@@ -322,10 +321,10 @@ class Reporte extends Admin
 	{
 		$this->is_allowed('reporte_view');
 
-		$this->data['reporte'] = $this->model_reporte->join_avaiable()->filter_avaiable()->find($id);
+		$this->data['reporte'] = $this->model_reporte_dias->join_avaiable()->filter_avaiable()->find($id);
 
 		$this->template->title('Reporte Detail');
-		$this->render('backend/standart/administrator/reporte/reporte_view', $this->data);
+		$this->render('backend/standart/administrator/reportepordias/reporte_view', $this->data);
 	}
 	
 	/**
@@ -335,11 +334,11 @@ class Reporte extends Admin
 	*/
 	private function _remove($id)
 	{
-		$reporte = $this->model_reporte->find($id);
+		$reporte = $this->model_reporte_dias->find($id);
 
 		
 		
-		return $this->model_reporte->remove($id);
+		return $this->model_reporte_dias->remove($id);
 	}
 	
 	
@@ -352,7 +351,7 @@ class Reporte extends Admin
 	{
 		$this->is_allowed('reporte_export');
 
-		$this->model_reporte->export('reporte', 'reporte');
+		$this->model_reporte_dias->export('reporte', 'reporte');
 	}
 
 	/**
@@ -364,10 +363,10 @@ class Reporte extends Admin
 	{
 		$this->is_allowed('reporte_export');
 
-		$this->model_reporte->pdf('reporte', 'reporte');
+		$this->model_reporte_dias->pdf('reporte', 'reporte');
 	}
 }
 
 
 /* End of file reporte.php */
-/* Location: ./application/controllers/administrator/Reporte.php */
+/* Location: ./application/controllers/administrator/reportepordias.php */

@@ -1,37 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Model_reporte extends MY_Model {
+class Model_reporte_dias extends MY_Model {
 
-	private $primary_key 	= 'IdReporte';
-	private $table_name 	= 'reporte';
+	private $primary_key 	= '';
+	private $table_name 	= 'reporte_dias_reparacion';
 	private $field_search 	= [
-		'estado',
-		'estatus_reporte',
-		'NumeroReporte', 
-		'cliente', 
-		'fechaingreso', 
-		'orden', 
-		'marca', 
-		'modelo', 
-		'ano', 
-		'Valuacion', 
-		'perdida_total', 
-		'PresupuestoEnviado', 
-		'PresupuestoAceptado', 
-		'SolicitudRefacciones', 
-		'refaccionesact', 
-		'TotalRefacciones', 
-		'RefaccionesDispoiblesPorcentaje', 
-		'UnidadProgRampa', 
-		'ReparacionUnidadPorcentaje', 
-		'Deducible', 
-		'MontoDeducible', 
-		'FechaEntrega',
-		'comentario_externo',
-		'comentario_interno',
-		'pago_danos',
-		'refacciones_faltantes'
+		"mes", 
+		"total_reporte_mensual", 
+		"cantidad_reportes", 
+		"dias"
 	];
 
 	public function __construct()
@@ -49,9 +27,9 @@ class Model_reporte extends MY_Model {
 	{
 		$iterasi = 1;
         $num = count($this->field_search);
-		$where = ("reporte.estatus_reporte = 1");
-		$this->join_avaiable()->filter_avaiable();
-        $this->db->where($where);
+		// $where = ("reporte.estatus_reporte = 1");
+		// $this->join_avaiable()->filter_avaiable();
+        // $this->db->where($where);
 		$query = $this->db->get($this->table_name);
 
 		return $query->num_rows();
@@ -64,12 +42,12 @@ class Model_reporte extends MY_Model {
         $where = NULL;
         $q = $this->scurity($q);
 		$field = $this->scurity($field);
-		$and = ("reporte.estatus_reporte = 1");
-		$this->join_avaiable()->filter_avaiable();
+		// $and = ("reporte.estatus_reporte = 1");
+		// $this->join_avaiable()->filter_avaiable();
 		//$this->db->where($where);
-		$this->db->where($and);
+		// $this->db->where($and);
         $this->db->limit($limit, $offset);
-        $this->db->order_by('reporte.'.$this->primary_key, "DESC");
+        // $this->db->order_by('reporte_dias_reparacion.'.$this->primary_key, "DESC");
 		$query = $this->db->get($this->table_name);
 
 		return $query->result();
@@ -79,27 +57,41 @@ class Model_reporte extends MY_Model {
         $q = $this->scurity($q);
 		$field = $this->scurity($field);
 		switch ($field) {
-			case 'cliente':
-				$field = 'if(persona.Apellidos = persona.Nombre, `persona`.`Nombre`, concat(persona.Apellidos, " ", persona.Nombre))';
-				$where .= "(".$field . " LIKE '%" . $q . "%' )";
-				break;
-			case 'marca':
-				$field = 'cat_marca.Descripcion';
-				$where .= "(".$field . " LIKE '%" . $q . "%' )";
-				break;
-			case 'todo':
-				$where = "1=1";
-				break;
-			default:
-				$where .= "(" . "reporte.".$field . " LIKE '%" . $q . "%' )";
-				break;
+				
+				case "mes":
+					$field = 'mes';
+					$where .= "(".$field . " LIKE '%" . $q . "%' )";
+					break;
+				
+				case "total_reporte_mensual":
+					$field = 'total_reporte_mensual';
+					$where .= "(".$field . " LIKE '%" . $q . "%' )";
+					break;
+				
+				case "cantidad_reportes":
+					$field = 'cantidad_reportes';
+					$where .= "(".$field . " LIKE '%" . $q . "%' )";
+					break;
+				
+				case "dias":
+					$field = 'dias';
+					$where .= "(".$field . " LIKE '%" . $q . "%' )";
+					break;
+
+				case 'todo':
+					$where = "1=1";
+					break;
+
+				default:
+					$where .= "(" . $field . " LIKE '%" . $q . "%' )";
+					break;
 		}
-		$and = ("reporte.estatus_reporte = 1");
-		$this->join_avaiable()->filter_avaiable();
+		// $and = ("reporte.estatus_reporte = 1");
+		// $this->join_avaiable()->filter_avaiable();
 		$this->db->where($where);
-		$this->db->where($and);
+		// $this->db->where($and);
         $this->db->limit($limit, $offset);
-        $this->db->order_by('reporte.'.$this->primary_key, "DESC");
+        // $this->db->order_by('reporte.'.$this->primary_key, "DESC");
 		$query = $this->db->get($this->table_name);
 		if ($contar == null) {
 			return $query->result();

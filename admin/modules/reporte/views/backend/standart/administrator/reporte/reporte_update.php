@@ -77,14 +77,14 @@
                          
 
                          <div class="form-group ">
-                            <label for="estatus" class="col-sm-2 control-label">Estatus 
+                            <label for="estado" class="col-sm-2 control-label">Status 
                             <i class="required">*</i>
                             </label>
                             <div class="col-sm-8">
-                                <select  class="form-control chosen chosen-select" name="estatus" id="estatus" data-placeholder="Select estatus" >
+                                <select  class="form-control chosen chosen-select" name="estado" id="estado" data-placeholder="Select estado" >
                                     <option value=""></option>
-                                    <option <?= $reporte->estatus == "SI" ? 'selected' :''; ?> value="2">En proceso</option>
-                                    <option <?= $reporte->estatus == "NO" ? 'selected' :''; ?> value="3">Cerrado</option>
+                                    <option <?= $reporte->estado == "2" ? 'selected' :''; ?> value="2">En proceso</option>
+                                    <option <?= $reporte->estado == "3" ? 'selected' :''; ?> value="3">Cerrado</option>
                                     </select>
                                 <small class="info help-block">
                                 </small>

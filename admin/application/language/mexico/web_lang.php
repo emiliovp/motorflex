@@ -273,4 +273,5 @@ $lang['group_user'] = 'Tipo de usuario';
 $lang['detail_user'] = 'Detalles de usuario';
 $lang['edit_profile'] = 'Editar perfil';
 
-
+//Triada
+$lang['list_dias_reparacion'] = 'Reporte de días de Reparación $1';

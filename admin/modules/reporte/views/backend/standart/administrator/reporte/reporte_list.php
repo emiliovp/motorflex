@@ -144,14 +144,14 @@ jQuery(document).ready(domo);
                            <td width="5">
                               <input type="checkbox" class="flat-red check" name="id[]" value="<?= $reporte->IdReporte; ?>">
                            </td>
-                           <td><? if($reporte->dias <= 10){
+                           <td><?php if($reporte->dias <= 10){
                               $circulo = 'circulo1';
                            }else if ($reporte->dias > 10 && $reporte->dias <= 20) {
                               $circulo = 'circulo2';
                            }else if ($reporte->dias > 20){
                               $circulo = 'circulo3';
                            }
-                           ?><div id="<? echo($circulo); ?>"></div></td>
+                           ?><div id="<?php echo($circulo); ?>"></div></td>
                            <td><? if($reporte->dias < 1){
                               $circulo_pe = 'circulo1';
                            }else if ($reporte->dias > 1 && $reporte->PresupuestoAceptado == 'NO') {
@@ -183,7 +183,7 @@ jQuery(document).ready(domo);
                            <td><?= _ent($reporte->Deducible); ?></td> 
                            <td><?= _ent($reporte->MontoDeducible); ?></td> 
                            <td><?= _ent($reporte->FechaEntrega); ?></td>
-                           <td><? $var= $reporte->estado; switch ($var) {
+                           <td><?php $var= $reporte->estado; switch ($var) {
                               case '1':
                                  $estado = "Abierto";
                                  break;

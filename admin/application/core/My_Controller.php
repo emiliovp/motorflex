@@ -96,7 +96,7 @@ class MY_Controller extends MX_Controller  {
             'suffix'           => isset($_GET)?'?'.http_build_query($_GET):'',
             'base_url'         => site_url($config['base_url']),
             'total_rows'       => $config['total_rows'],
-            'per_page'         => $config['per_page'],
+            'per_page'         => 100,// $config['per_page'],
             'uri_segment'      => $config['uri_segment'],
             'num_links'        => 1,
             'num_tag_open'     => '<li>',
@@ -452,7 +452,7 @@ class MY_Controller extends MX_Controller  {
 */
 class Admin extends MY_Controller
 {
-    public $limit_page = 10;
+    public $limit_page = 100;
 
     public function __construct()
     {
@@ -792,7 +792,7 @@ class Front extends MY_Controller
 
 class API extends REST_Controller
 {
-    public $limit_page = 10;
+    public $limit_page = 100;
     
     public function __construct()
     {

@@ -83,8 +83,8 @@
                             <div class="col-sm-8">
                                 <select  class="form-control chosen chosen-select" name="estatus" id="estatus" data-placeholder="Select estatus" >
                                     <option value=""></option>
-                                    <option <?= $reporte->estatus == "SI" ? 'selected' :''; ?> value="2">En proceso</option>
-                                    <option <?= $reporte->estatus == "NO" ? 'selected' :''; ?> value="3">Cerrado</option>
+                                    <option <?= $reporte->estado == 2 ? 'selected' :''; ?> value="2">En proceso</option>
+                                    <option <?= $reporte->estado == 3 ? 'selected' :''; ?> value="3">Cerrado</option>
                                     </select>
                                 <small class="info help-block">
                                 </small>
@@ -109,7 +109,9 @@
                                 <select  class="form-control chosen chosen-select-deselect" name="cliente" id="cliente" data-placeholder="Select Cliente" >
                                     <option value=""></option>
                                     <?php foreach (db_get_all_data('persona') as $row): ?>
-                                    <option <?=  $row->IdPersona ==  $reporte->cliente ? 'selected' : ''; ?> value="<?= $row->IdPersona ?>"><?= $row->Apellidos; ?></option>
+                                    <option <?=  $row->IdPersona ==  $reporte->cliente ? 'selected' : ''; ?> value="<?= $row->IdPersona ?>"><? if ($row->Nombre == $row->Apellidos){
+                                        $nombre = $row->Nombre;
+                                    }else{$nombre =$row->Apellidos." ".$row->Nombre; } echo $nombre; ?></option>
                                     <?php endforeach; ?>  
                                 </select>
                                 <small class="info help-block">

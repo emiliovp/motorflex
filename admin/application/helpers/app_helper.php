@@ -215,8 +215,15 @@ if(!function_exists('display_menu_admin')) {
 				
 				$row->link = parse_nav_url($row->link);		   
 
-		   		$perms = 'menu_'.strtolower(str_replace(' ', '_', $row->label));
-
+				switch ($row->label) {
+					case 'Reporte de días de reparación':
+						$perms = "menu_reporte_dias_reparacion";
+						// die($perms);
+						break;
+					default:
+						$perms = 'menu_'.strtolower(str_replace(' ', '_', $row->label));
+						break;
+				}
 		   		$links = explode('/', $row->link);
 
 				$segments = array_slice($ci->uri->segment_array(), 0, count($links));

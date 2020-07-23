@@ -45,11 +45,11 @@ class Model_reporte extends MY_Model {
 		parent::__construct($config);
 	}
 
-	public function count_all($q = null, $field = null)
+	public function count_all($q = null, $field = null, $estatus = 1)
 	{
 		$iterasi = 1;
         $num = count($this->field_search);
-		$where = ("reporte.estatus_reporte = 1");
+		$where = ("reporte.estatus_reporte =".$estatus);
 		$this->join_avaiable()->filter_avaiable();
         $this->db->where($where);
 		$query = $this->db->get($this->table_name);
@@ -57,14 +57,14 @@ class Model_reporte extends MY_Model {
 		return $query->num_rows();
 	}
 
-	public function get($q = null, $field = null, $limit = 0, $offset = 0, $select_field = [])
+	public function get($q = null, $field = null, $estatus = 1 ,$limit = 0, $offset = 0, $select_field = [])
 	{
 		$iterasi = 1;
         $num = count($this->field_search);
         $where = NULL;
         $q = $this->scurity($q);
 		$field = $this->scurity($field);
-		$and = ("reporte.estatus_reporte = 1");
+		$and = ("reporte.estatus_reporte =".$estatus);
 		$this->join_avaiable()->filter_avaiable();
 		//$this->db->where($where);
 		$this->db->where($and);
@@ -74,7 +74,7 @@ class Model_reporte extends MY_Model {
 
 		return $query->result();
 	}
-	public function search($q = null, $field = null, $contar = null, $limit = 0, $offset = 0, $select_field = []){
+	public function search($q = null, $field = null, $contar = null, $estatus = 1,$limit = 0, $offset = 0, $select_field = []){
         $where = NULL;
         $q = $this->scurity($q);
 		$field = $this->scurity($field);
@@ -94,7 +94,7 @@ class Model_reporte extends MY_Model {
 				$where .= "(" . "reporte.".$field . " LIKE '%" . $q . "%' )";
 				break;
 		}
-		$and = ("reporte.estatus_reporte = 1");
+		$and = ("reporte.estatus_reporte =".$estatus);
 		$this->join_avaiable()->filter_avaiable();
 		$this->db->where($where);
 		$this->db->where($and);
@@ -114,7 +114,7 @@ class Model_reporte extends MY_Model {
         $this->db->join('persona', 'persona.IdPersona = reporte.cliente', 'LEFT');
         $this->db->join('cat_marca', 'cat_marca.IdMarca = reporte.marca', 'LEFT');
         
-    	$this->db->select('reporte.*,if(persona.Apellidos = persona.Nombre,persona.Nombre, concat(persona.Apellidos," ",persona.Nombre)) AS persona_Apellidos,cat_marca.Descripcion as cat_marca_Descripcion');
+    	$this->db->select('reporte.*,if(persona.Apellidos = persona.Nombre,persona.Nombre, concat(persona.Apellidos," ",persona.Nombre)) AS persona_Apellidos,cat_marca.Descripcion as cat_marca_Descripcion, TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) as dias,TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) as dias_presupuesto');
 
 
         return $this;

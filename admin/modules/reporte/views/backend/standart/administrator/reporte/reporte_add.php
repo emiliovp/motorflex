@@ -87,7 +87,9 @@
                                 <select  class="form-control chosen chosen-select-deselect" name="cliente" id="cliente" data-placeholder="Seleccionar Cliente" >
                                     <option value=""></option>
                                     <?php foreach (db_get_all_data('persona') as $row): ?>
-                                    <option value="<?= $row->IdPersona ?>"><?= $row->Apellidos; ?></option>
+                                    <option value="<?= $row->IdPersona ?>"><? if ($row->Nombre == $row->Apellidos){
+                                        $nombre = $row->Nombre;
+                                    }else{$nombre =$row->Apellidos." ".$row->Nombre; } echo $nombre; ?></option>
                                     <?php endforeach; ?>  
                                 </select>
                                 <small class="info help-block">
@@ -551,9 +553,6 @@ if ($("#RefaccionesDispoiblesPorcentaje").val() != 0) {
     
     }); /*end doc ready*/
 </script>
-
-
-
 <script>
 (function($) {
     $("#perdida_total").change(function() {

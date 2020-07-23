@@ -83,9 +83,6 @@ jQuery(document).ready(domo);
                   <!-- Add the bg color to the header using any of the bg-* classes -->
                   <div class="widget-user-header ">
                      <div class="row pull-right">
-                        <?php is_allowed('reporte_add', function(){?>
-                        <a class="btn btn-flat btn-success btn_add_new" id="btn_add_new" title="<?= cclang('add_new_button', ['Reporte']); ?>  (Ctrl+a)" href="<?=  site_url('administrator/reporte/add'); ?>"><i class="fa fa-plus-square-o" ></i> <?= cclang('add_new_button', ['Reporte']); ?></a>
-                        <?php }) ?>
                         <?php is_allowed('reporte_export', function(){?>
                         <a class="btn btn-flat btn-success" title="<?= cclang('export'); ?> Reporte" href="<?= site_url('administrator/reporte/export'); ?>"><i class="fa fa-file-excel-o" ></i> <?= cclang('export'); ?> XLS</a>
                         <?php }) ?>
@@ -101,7 +98,7 @@ jQuery(document).ready(domo);
                      <h5 class="widget-user-desc"><?= cclang('list_all', ['Reporte']); ?>  <i class="label bg-yellow"><?= $reporte_counts; ?>  <?= cclang('items'); ?></i></h5>
                   </div>
 
-                  <form name="form_reporte" id="form_reporte" action="<?= base_url('administrator/reporte/index'); ?>">
+                  <form name="form_reporte" id="form_reporte" action="<?= base_url('administrator/reporte/reporteBajas'); ?>">
                   
 
                   <div class="table-responsive"> 
@@ -195,14 +192,8 @@ jQuery(document).ready(domo);
                                  break;
                            } echo($estado); ?></td> 
                            <td width="200">
-                              <?php is_allowed('reporte_view', function() use ($reporte){?>
-                              <a href="<?= site_url('administrator/reporte/view/' . $reporte->IdReporte); ?>" class="label-default"><i class="fa fa-newspaper-o"></i> <?= cclang('view_button'); ?>
-                              <?php }) ?>
-                              <?php is_allowed('reporte_update', function() use ($reporte){?>
-                              <a href="<?= site_url('administrator/reporte/edit/' . $reporte->IdReporte); ?>" class="label-default"><i class="fa fa-edit "></i> <?= cclang('update_button'); ?></a>
-                              <?php }) ?>
                               <?php is_allowed('reporte_delete', function() use ($reporte){?>
-                              <a href="javascript:void(0);" data-href="<?= site_url('administrator/reporte/delete/' . $reporte->IdReporte); ?>" class="label-default remove-data"><i class="fa fa-close"></i> <?= cclang('remove_button'); ?></a>
+                              <a href="javascript:void(0);" data-href="<?= site_url('administrator/reporte/activar/' . $reporte->IdReporte); ?>" class="label-default remove-data"><i class="fa fa-close"></i> Recuperar</a>
                                <?php }) ?>
                            </td>
                         </tr>
@@ -225,7 +216,7 @@ jQuery(document).ready(domo);
                      <div class="col-sm-2 padd-left-0 " >
                         <select type="text" class="form-control chosen chosen-select" name="bulk" id="bulk" placeholder="Site Email" >
                            <option value="">Bulk</option>
-                           <option value="delete">Delete</option>
+                           <!--<option value="delete">Delete</option>-->
                         </select>
                      </div>
                      <div class="col-sm-2 padd-left-0 ">
@@ -264,7 +255,7 @@ jQuery(document).ready(domo);
                         </button>
                      </div>
                      <div class="col-sm-1 padd-left-0 ">
-                        <a class="btn btn-default btn-flat" name="reset" id="reset" value="Apply" href="<?= base_url('administrator/reporte');?>" title="<?= cclang('reset_filter'); ?>">
+                        <a class="btn btn-default btn-flat" name="reset" id="reset" value="Apply" href="<?= base_url('administrator/reporte/reporteBajas');?>" title="<?= cclang('reset_filter'); ?>">
                         <i class="fa fa-undo"></i>
                         </a>
                      </div>
@@ -294,11 +285,11 @@ jQuery(document).ready(domo);
 
       swal({
           title: "<?= cclang('are_you_sure'); ?>",
-          text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
+          text: "<?= cclang('are_you_sure_to_activate_the_registration'); ?>",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          confirmButtonText: "<?= cclang('yes_delete_it'); ?>",
+          confirmButtonText: "<?= cclang('yes_activate_registration'); ?>",
           cancelButtonText: "<?= cclang('no_cancel_plx'); ?>",
           closeOnConfirm: true,
           closeOnCancel: true
@@ -321,18 +312,18 @@ jQuery(document).ready(domo);
       if (bulk.val() == 'delete') {
          swal({
             title: "<?= cclang('are_you_sure'); ?>",
-            text: "<?= cclang('data_to_be_deleted_can_not_be_restored'); ?>",
+            text: "<?= cclang('are_you_sure_to_activate_the_registration'); ?>",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "<?= cclang('yes_delete_it'); ?>",
+            confirmButtonText: "<?= cclang('yes_activate_registration'); ?>",
             cancelButtonText: "<?= cclang('no_cancel_plx'); ?>",
             closeOnConfirm: true,
             closeOnCancel: true
           },
           function(isConfirm){
             if (isConfirm) {
-               document.location.href = BASE_URL + '/administrator/reporte/delete?' + serialize_bulk;      
+               document.location.href = BASE_URL + '/administrator/reporte/activar?' + serialize_bulk;      
             }
           });
 

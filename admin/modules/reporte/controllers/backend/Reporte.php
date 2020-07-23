@@ -30,21 +30,20 @@ class Reporte extends Admin
 
 		$filter = $this->input->get('q');
 		$field 	= $this->input->get('f');
-		//echo $field;
-		//die();
+		
 		if (isset($field)) {
-			$this->data['reportes'] = $this->model_reporte->search($filter, $field, $contar = null, $this->limit_page, $offset);
-			$this->data['reporte_counts'] = $this->model_reporte->search($filter, $field, $contar = 1, $this->limit_page, $offset);
+			$this->data['reportes'] = $this->model_reporte->search($filter, $field, $contar = null, $estatus = 1,$this->limit_page, $offset);
+			$this->data['reporte_counts'] = $this->model_reporte->search($filter, $field, $contar = 1, $estatus = 1 ,$this->limit_page, $offset);
 			if ($field == 'todo') {
-				$count = $this->model_reporte->count_all($filter, $field);
+				$count = $this->model_reporte->count_all($filter, $field,$estatus = 1);
 				$this->data['reporte_counts'] = $count;
 			}else{
-				$count = $this->model_reporte->search($filter, $field, $contar = 1, $this->limit_page, $offset);
+				$count = $this->model_reporte->search($filter, $field, $contar = 1, $estatus = 1, $this->limit_page, $offset);
 			}
 		}else{
-			$this->data['reportes'] = $this->model_reporte->get($filter, $field, $this->limit_page, $offset);
-			$this->data['reporte_counts'] = $this->model_reporte->count_all($filter, $field);
-			$count = $this->model_reporte->count_all($filter, $field);
+			$this->data['reportes'] = $this->model_reporte->get($filter, $field, $estatus = 1,$this->limit_page, $offset);
+			$this->data['reporte_counts'] = $this->model_reporte->count_all($filter, $field, $estatus = 1);
+			$count = $this->model_reporte->count_all($filter, $field, $estatus = 1);
 		}
 		$config = [
 			'base_url'     => 'administrator/reporte/index/',
@@ -211,7 +210,31 @@ class Reporte extends Admin
 		$this->form_validation->set_rules('comentario_externo', 'Comentario Externo', 'trim');
 		
 		if ($this->form_validation->run()) {
-		
+			$data = $this->model_reporte->find($id);
+			
+			$enviado = ($this->input->post('PresupuestoEnviado')) ? $this->input->post('PresupuestoEnviado') : NULL;
+			if ($enviado == 'SI') {
+				if ($enviado == $data->PresupuestoEnviado) {
+					$fecha_envio_presupuesto = $data->fecha_envio_presupuesto;
+					$enviado = $data->PresupuestoEnviado;
+				}else{
+					$fecha_envio_presupuesto = date('Y-m-d G:i:s');
+				}
+				$PresupuestoAceptado = ($this->input->post('PresupuestoAceptado')) ? $this->input->post('PresupuestoAceptado') : "";
+				if ($PresupuestoAceptado == $data->PresupuestoAceptado) {
+					$fecha_presupuesto_aceptado = $data->fecha_envio_presupuesto;
+					$PresupuestoAceptado = $data->PresupuestoAceptado;
+				}else{
+					$PresupuestoAceptado = ($this->input->post('PresupuestoAceptado')) ? $this->input->post('PresupuestoAceptado') : 'NO';
+					$fecha_presupuesto_aceptado = ($this->input->post('PresupuestoAceptado') == 'SI') ? date('Y-m-d G:i:s') : NULL;
+				}
+			}else{
+				$enviado = 'NO';
+				$fecha_envio_presupuesto = NULL;
+				$PresupuestoAceptado = 'NO';
+				$fecha_presupuesto_aceptado = NULL;
+			}
+			
 			$save_data = [
 				'NumeroReporte' => $this->input->post('NumeroReporte'),
 				'cliente' => $this->input->post('cliente'),
@@ -224,8 +247,10 @@ class Reporte extends Admin
 				'perdida_total' => $this->input->post('perdida_total'),
 				'pago_danos' => $this->input->post('pago_danos'),
 				'estado' => ($this->input->post('estado')) ? $this->input->post('estado') : "",
-				'PresupuestoEnviado' => ($this->input->post('PresupuestoEnviado')) ? $this->input->post('PresupuestoEnviado') : "",
-				'PresupuestoAceptado' => ($this->input->post('PresupuestoAceptado')) ? $this->input->post('PresupuestoAceptado') : "",
+				'PresupuestoEnviado' => $enviado,
+				'fecha_envio_presupuesto' => $fecha_envio_presupuesto,
+				'PresupuestoAceptado' => $PresupuestoAceptado,
+				'fecha_presupuesto_aceptado' => $fecha_presupuesto_aceptado,
 				'SolicitudRefacciones' => ($this->input->post('SolicitudRefacciones')) ? $this->input->post('SolicitudRefacciones') : "",
 				'refaccionesact' => ($this->input->post('refaccionesact')) ? $this->input->post('refaccionesact') : "",
 				'TotalRefacciones' => ($this->input->post('TotalRefacciones')) ? $this->input->post('TotalRefacciones') : "",
@@ -240,7 +265,7 @@ class Reporte extends Admin
 				'comentario_interno' => ($this->input->post('comentario_interno')) ? $this->input->post('comentario_interno') : "",
 				'comentario_externo' => ($this->input->post('comentario_externo')) ? $this->input->post('comentario_externo') : "",
 			];
-			
+	
 			$save_reporte = $this->model_reporte->change($id, $save_data);
 
 			if ($save_reporte) {
@@ -365,6 +390,70 @@ class Reporte extends Admin
 		$this->is_allowed('reporte_export');
 
 		$this->model_reporte->pdf('reporte', 'reporte');
+	}
+	public function reporteBajas($offset = 0)
+	{
+		//$this->is_allowed('reporte_list_bajas');
+		$this->is_allowed('reporte_list');
+		$filter = $this->input->get('q');
+		$field 	= $this->input->get('f');
+		
+		if (isset($field)) {
+			$this->data['reportes'] = $this->model_reporte->search($filter, $field, $contar = null, $estatus=2 , $this->limit_page, $offset);
+			$this->data['reporte_counts'] = $this->model_reporte->search($filter, $field, $contar = 1, $estatus=2, $this->limit_page, $offset);
+			if ($field == 'todo') {
+				$count = $this->model_reporte->count_all($filter, $field, $estatus=2);
+				$this->data['reporte_counts'] = $count;
+			}else{
+				$count = $this->model_reporte->search($filter, $field, $contar = 1, $estatus = 2,$this->limit_page, $offset);
+			}
+		}else{
+			$this->data['reportes'] = $this->model_reporte->get($filter, $field, $estatus = 2 ,$this->limit_page, $offset);
+			$this->data['reporte_counts'] = $this->model_reporte->count_all($filter, $field, $estatus = 2);
+			$count = $this->model_reporte->count_all($filter, $field, $estatus = 2);
+		}
+		$config = [
+			'base_url'     => 'administrator/reporte/reporteBajas/',
+			'total_rows'   => $count,
+			'per_page'     => $this->limit_page,
+			'uri_segment'  => 4,
+		];
+
+		$this->data['pagination'] = $this->pagination($config);
+
+		$this->template->title('Reporte List');
+		$this->render('backend/standart/administrator/reporte/reporte_list _bajas', $this->data);
+	}
+	public function activar($id = null)
+	{
+		$this->is_allowed('reporte_delete');
+
+		$this->load->helper('file');
+
+		$arr_id = $this->input->get('id');
+		$remove = false;
+
+		$data = [
+			'estatus_reporte' => 1,
+			'updated_at'=> date('Y-m-d G:i:s')
+		];
+		if (isset($id)) {
+			// $remove = $this->_remove($id);
+			$remove = $this->model_reporte->change($id,$data);
+		} elseif (count($arr_id) >0) {
+			foreach ($arr_id as $id) {
+			// $remove = $this->_remove($id);
+			$remove = $this->model_reporte->change($id,$data);
+			}
+		}
+
+		if ($remove) {
+            set_message(cclang('has_been_activate', 'reporte'), 'success');
+        } else {
+            set_message(cclang('error_activate', 'reporte'), 'error');
+        }
+
+		redirect_back();
 	}
 }
 

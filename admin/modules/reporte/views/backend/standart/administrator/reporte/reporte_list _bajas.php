@@ -141,22 +141,22 @@ jQuery(document).ready(domo);
                            <td width="5">
                               <input type="checkbox" class="flat-red check" name="id[]" value="<?= $reporte->IdReporte; ?>">
                            </td>
-                           <td><? if($reporte->dias <= 10){
+                           <td><?php if($reporte->dias <= 10){
                               $circulo = 'circulo1';
                            }else if ($reporte->dias > 10 && $reporte->dias <= 20) {
                               $circulo = 'circulo2';
                            }else if ($reporte->dias > 20){
                               $circulo = 'circulo3';
                            }
-                           ?><div id="<? echo($circulo); ?>"></div></td>
-                           <td><? if($reporte->dias < 1){
+                           ?><div id="<?php echo($circulo); ?>"></div></td>
+                           <td><?php if($reporte->dias < 1){
                               $circulo_pe = 'circulo1';
                            }else if ($reporte->dias > 1 && $reporte->PresupuestoAceptado == 'NO') {
                               $circulo_pe = 'circulo2';
                            }else if ($reporte->dias > 1 && $reporte->PresupuestoAceptado == 'SI') {
                               $circulo_pe = 'circulo1';
                            }
-                           ?><div id="<? echo($circulo_pe); ?>"></div></td>
+                           ?><div id="<?php echo($circulo_pe); ?>"></div></td>
                            <td><?= _ent($reporte->NumeroReporte); ?></td> 
                            <td><?= _ent($reporte->persona_Apellidos); ?></td>
                              

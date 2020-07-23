@@ -82,6 +82,7 @@ jQuery(document).ready(domo);
                            </th>
                            <th>Nombre</th>
                            <th>Apellidos</th>
+                           <th>Contacto</th>
                            <th>Alcaldía</th>
                            <th>CP</th>
                            <th>Colonia</th>
@@ -104,6 +105,7 @@ jQuery(document).ready(domo);
                            
                            <td><?= _ent($persona->Nombre); ?></td> 
                            <td><?= _ent($persona->Apellidos); ?></td> 
+                           <td><?= _ent($persona->contacto); ?></td> 
                            <td><?= _ent($persona->alcaldia); ?></td> 
                            <td><?= _ent($persona->cp); ?></td> 
                            <td><?= _ent($persona->colonia); ?></td> 
@@ -157,8 +159,9 @@ jQuery(document).ready(domo);
                      <div class="col-sm-3 padd-left-0 " >
                         <select type="text" class="form-control chosen chosen-select" name="f" id="field" >
                            <option value=""><?= cclang('all'); ?></option>
-                            <option <?= $this->input->get('f') == 'Nombre' ? 'selected' :''; ?> value="Nombre">Nombre</option>
+                           <option <?= $this->input->get('f') == 'Nombre' ? 'selected' :''; ?> value="Nombre">Nombre</option>
                            <option <?= $this->input->get('f') == 'Apellidos' ? 'selected' :''; ?> value="Apellidos">Apellidos</option>
+                           <option <?= $this->input->get('f') == 'contacto' ? 'selected' :''; ?> value="contacto">Contacto</option>
                            <option <?= $this->input->get('f') == 'alcaldia' ? 'selected' :''; ?> value="alcaldia">Alcaldia</option>
                            <option <?= $this->input->get('f') == 'cp' ? 'selected' :''; ?> value="cp">Cp</option>
                            <option <?= $this->input->get('f') == 'colonia' ? 'selected' :''; ?> value="colonia">Colonia</option>

@@ -79,7 +79,7 @@ class Persona extends Admin
 		$this->form_validation->set_rules('contacto', 'contacto', 'trim|required');
 		$this->form_validation->set_rules('Telefono', 'Telefono', 'trim|required');
 		$this->form_validation->set_rules('correo', 'Correo', 'trim|required');
-		$this->form_validation->set_rules('IdDireccion', 'IdDireccion', 'trim|required');
+		// $this->form_validation->set_rules('IdDireccion', 'IdDireccion', 'trim|required');
 		
 
 		if ($this->form_validation->run()) {
@@ -87,6 +87,7 @@ class Persona extends Admin
 			$save_data = [
 				'Nombre' => $this->input->post('Nombre'),
 				'Apellidos' => $this->input->post('Apellidos'),
+				'contacto' => $this->input->post('contacto'),
 				'alcaldia' => $this->input->post('alcaldia'),
 				'cp' => $this->input->post('cp'),
 				'colonia' => $this->input->post('colonia'),
@@ -95,7 +96,7 @@ class Persona extends Admin
 				'Telefono' => $this->input->post('Telefono'),
 				'correo' => $this->input->post('correo'),
 				'RFC' => $this->input->post('RFC'),
-				'IdDireccion' => $this->input->post('IdDireccion'),
+				'IdDireccion' => 1,
 				'cumpl' => $this->input->post('cumpl'),
 			];
 
@@ -172,13 +173,15 @@ class Persona extends Admin
 		$this->form_validation->set_rules('Apellidos', 'Apellidos', 'trim|required');
 		$this->form_validation->set_rules('Telefono', 'Telefono', 'trim|required');
 		$this->form_validation->set_rules('correo', 'Correo', 'trim|required');
-		$this->form_validation->set_rules('IdDireccion', 'IdDireccion', 'trim|required');
+		$this->form_validation->set_rules('contacto', 'contacto', 'trim|required');
+		// $this->form_validation->set_rules('IdDireccion', 'IdDireccion', 'trim|required');
 		
 		if ($this->form_validation->run()) {
 		
 			$save_data = [
 				'Nombre' => $this->input->post('Nombre'),
 				'Apellidos' => $this->input->post('Apellidos'),
+				'contacto' => $this->input->post('contacto'),
 				'alcaldia' => $this->input->post('alcaldia'),
 				'cp' => $this->input->post('cp'),
 				'colonia' => $this->input->post('colonia'),
@@ -187,7 +190,7 @@ class Persona extends Admin
 				'Telefono' => $this->input->post('Telefono'),
 				'correo' => $this->input->post('correo'),
 				'RFC' => $this->input->post('RFC'),
-				'IdDireccion' => $this->input->post('IdDireccion'),
+				'IdDireccion' => 1,
 				'cumpl' => $this->input->post('cumpl'),
 			];
 

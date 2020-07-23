@@ -80,6 +80,17 @@
                                 </small>
                             </div>
                         </div>
+
+                        <div class="form-group ">
+                            <label for="contacto" class="col-sm-2 control-label">Contacto 
+                            <i class="required">*</i>
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="contacto" id="contacto" placeholder="Contacto" value="<?= set_value('contacto', $persona->contacto); ?>">
+                                <small class="info help-block">
+                                </small>
+                            </div>
+                        </div>
                                                  
                                                 <div class="form-group ">
                             <label for="alcaldia" class="col-sm-2 control-label">Alcaldía 
@@ -163,7 +174,7 @@
                             </div>
                         </div>
                                                  
-                                                <div class="form-group ">
+                                                <!-- <div class="form-group ">
                             <label for="IdDireccion" class="col-sm-2 control-label">IdDireccion 
                             <i class="required">*</i>
                             </label>
@@ -172,7 +183,7 @@
                                 <small class="info help-block">
                                 </small>
                             </div>
-                        </div>
+                        </div> -->
                                                  
                                                 <div class="form-group ">
                             <label for="cumpl" class="col-sm-2 control-label">Cumpleaños 

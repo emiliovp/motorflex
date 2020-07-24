@@ -180,7 +180,7 @@ jQuery(document).ready(domo);
                            <td><?= _ent($reporte->Deducible); ?></td> 
                            <td><?= _ent($reporte->MontoDeducible); ?></td> 
                            <td><?= _ent($reporte->FechaEntrega); ?></td>
-                           <td><? $var= $reporte->estado; switch ($var) {
+                           <td><?php $var= $reporte->estado; switch ($var) {
                               case '1':
                                  $estado = "Abierto";
                                  break;

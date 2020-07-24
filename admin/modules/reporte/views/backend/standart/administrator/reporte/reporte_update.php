@@ -109,7 +109,7 @@
                                 <select  class="form-control chosen chosen-select-deselect" name="cliente" id="cliente" data-placeholder="Select Cliente" >
                                     <option value=""></option>
                                     <?php foreach (db_get_all_data('persona') as $row): ?>
-                                    <option <?=  $row->IdPersona ==  $reporte->cliente ? 'selected' : ''; ?> value="<?= $row->IdPersona ?>"><? if ($row->Nombre == $row->Apellidos){
+                                    <option <?=  $row->IdPersona ==  $reporte->cliente ? 'selected' : ''; ?> value="<?= $row->IdPersona ?>"><?php if ($row->Nombre == $row->Apellidos){
                                         $nombre = $row->Nombre;
                                     }else{$nombre =$row->Apellidos." ".$row->Nombre; } echo $nombre; ?></option>
                                     <?php endforeach; ?>  

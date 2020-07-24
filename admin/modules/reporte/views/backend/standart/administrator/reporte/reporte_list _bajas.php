@@ -149,10 +149,11 @@ jQuery(document).ready(domo);
                               $circulo = 'circulo3';
                            }
                            ?><div id="<?php echo($circulo); ?>"></div></td>
-                           <td><?php if($reporte->dias < 1){
+                           <td><?php $circulo_pe = 'circulo1';
+                           if($reporte->dias < 1){
                               $circulo_pe = 'circulo1';
                            }else if ($reporte->dias > 1 && $reporte->PresupuestoAceptado == 'NO') {
-                              $circulo_pe = 'circulo2';
+                              $circulo_pe = 'circulo3';
                            }else if ($reporte->dias > 1 && $reporte->PresupuestoAceptado == 'SI') {
                               $circulo_pe = 'circulo1';
                            }

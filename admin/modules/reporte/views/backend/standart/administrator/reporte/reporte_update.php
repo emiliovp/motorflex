@@ -519,8 +519,8 @@
       }); /*end btn save*/
       
        
-        $(function(){
-            $("#perdida_total").change(function() {
+$(function(){
+    $("#perdida_total").change(function() {
         var perdidatotal = $(this).val();
         var pagodanos = $("#pago_danos").val();
         if(perdidatotal == "SI" && pagodanos == "NO" || perdidatotal == "SI" && pagodanos == "") {
@@ -539,7 +539,7 @@
             $('#Deducible').prop("disabled", true);
             $('#MontoDeducible').prop("disabled", true);
             $('#FechaEntrega').prop("disabled", true);
-        } else if(perdidatotal == "NO" && pagodanos == "" || perdidatotal == "" && pagodanos == "") {
+        } else if(perdidatotal == "NO" && pagodanos == "NO" || perdidatotal == "NO" && pagodanos == "" || perdidatotal == "" && pagodanos == "") {
             $('#PresupuestoEnviado').prop("disabled", false);
             $('#PresupuestoEnviado').trigger('chosen:updated');
             $('#PresupuestoAceptado').prop("disabled", false);
@@ -576,7 +576,7 @@
             $('#Deducible').prop("disabled", true);
             $('#MontoDeducible').prop("disabled", true);
             $('#FechaEntrega').prop("disabled", true);
-        } else if(pagodanos == "NO" && perdidatotal == "NO" || pagodanos == "" && perdidatotal == "") {
+        } else if(pagodanos == "NO" && perdidatotal == "NO" || pagodanos == "NO" && perdidatotal == "" || pagodanos == "" && perdidatotal == "") {
             $('#PresupuestoEnviado').prop("disabled", false);
             $('#PresupuestoEnviado').trigger('chosen:updated');
             $('#PresupuestoAceptado').prop("disabled", false);
@@ -594,6 +594,7 @@
             $('#FechaEntrega').prop("disabled", false);
         }
     });
+    
     $('#refaccionesact').on('input', function() {
       calculate();
     });

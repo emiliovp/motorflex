@@ -574,7 +574,7 @@ if ($("#RefaccionesDispoiblesPorcentaje").val() != 0) {
             $('#Deducible').prop("disabled", true);
             $('#MontoDeducible').prop("disabled", true);
             $('#FechaEntrega').prop("disabled", true);
-        } else if(perdidatotal == "NO" && pagodanos == "" || perdidatotal == "" && pagodanos == "") {
+        } else if(perdidatotal == "NO" && pagodanos == "NO" || perdidatotal == "NO" && pagodanos == "" || perdidatotal == "" && pagodanos == "") {
             $('#PresupuestoEnviado').prop("disabled", false);
             $('#PresupuestoEnviado').trigger('chosen:updated');
             $('#PresupuestoAceptado').prop("disabled", false);
@@ -611,7 +611,7 @@ if ($("#RefaccionesDispoiblesPorcentaje").val() != 0) {
             $('#Deducible').prop("disabled", true);
             $('#MontoDeducible').prop("disabled", true);
             $('#FechaEntrega').prop("disabled", true);
-        } else if(pagodanos == "NO" && perdidatotal == "NO" || pagodanos == "" && perdidatotal == "") {
+        } else if(pagodanos == "NO" && perdidatotal == "NO" || pagodanos == "NO" && perdidatotal == "" || pagodanos == "" && perdidatotal == "") {
             $('#PresupuestoEnviado').prop("disabled", false);
             $('#PresupuestoEnviado').trigger('chosen:updated');
             $('#PresupuestoAceptado').prop("disabled", false);

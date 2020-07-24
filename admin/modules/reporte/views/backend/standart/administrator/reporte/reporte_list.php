@@ -123,12 +123,13 @@ jQuery(document).ready(domo);
                            <th>Año</th>
                            <th>Valuacion</th>
                            <th>Perdida Total</th>
+                           <th>Pago de Daños</th>
                            <th>Presupuesto Enviado</th>
                            <th>Valuación Autorizada</th>
                            <th>Solicitud De Refacciones</th>
                            <th>Refacciones Necesarias</th>
                            <th>Refacciones Conseguidas</th>
-                           <th>Refacciones Disponibles %</th>
+                           <th>Refacciones Faltantes</th>
                            <th>Unidad En Rampa</th>
                            <th>Reparación Unidad %</th>
                            <th>Deducible</th>
@@ -172,12 +173,13 @@ jQuery(document).ready(domo);
                            <td><?= _ent($reporte->ano); ?></td> 
                            <td><?= _ent($reporte->Valuacion); ?></td> 
                            <td><?= _ent($reporte->perdida_total); ?></td> 
+                           <td><?= _ent($reporte->pago_danos); ?></td> 
                            <td><?= _ent($reporte->PresupuestoEnviado); ?></td> 
                            <td><?= _ent($reporte->PresupuestoAceptado); ?></td> 
                            <td><?= _ent($reporte->SolicitudRefacciones); ?></td> 
                            <td><?= _ent($reporte->refaccionesact); ?></td> 
                            <td><?= _ent($reporte->TotalRefacciones); ?></td> 
-                           <td><?= _ent($reporte->RefaccionesDispoiblesPorcentaje); ?></td> 
+                           <td><?= _ent($reporte->refacciones_faltantes); ?></td> 
                            <td><?= _ent($reporte->UnidadProgRampa); ?></td> 
                            <td><?= _ent($reporte->ReparacionUnidadPorcentaje); ?></td> 
                            <td><?= _ent($reporte->Deducible); ?></td> 

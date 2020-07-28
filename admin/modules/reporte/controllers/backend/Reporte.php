@@ -99,6 +99,17 @@ class Reporte extends Admin
 
 
 		if ($this->form_validation->run()) {
+			$enviado = ($this->input->post('PresupuestoEnviado')) ? $this->input->post('PresupuestoEnviado') : NULL;
+			if ($enviado == 'SI') {
+				$fecha_envio_presupuesto = date('Y-m-d G:i:s');
+				$PresupuestoAceptado = ($this->input->post('PresupuestoAceptado')) ? $this->input->post('PresupuestoAceptado') : 'NO';
+				$fecha_presupuesto_aceptado = ($this->input->post('PresupuestoAceptado') == 'SI') ? date('Y-m-d G:i:s') : NULL;
+			}else{
+				$enviado = 'NO';
+				$fecha_envio_presupuesto = NULL;
+				$PresupuestoAceptado = 'NO';
+				$fecha_presupuesto_aceptado = NULL;
+			}
 		
 			$save_data = [
 				'NumeroReporte' => $this->input->post('NumeroReporte'),
@@ -111,8 +122,10 @@ class Reporte extends Admin
 				'Valuacion' => $this->input->post('Valuacion'),
 				'perdida_total' => $this->input->post('perdida_total'),
 				'pago_danos' => $this->input->post('pago_danos'),
-				'PresupuestoEnviado' => ($this->input->post('PresupuestoEnviado')) ? $this->input->post('PresupuestoEnviado') : "",
-				'PresupuestoAceptado' => ($this->input->post('PresupuestoAceptado')) ? $this->input->post('PresupuestoAceptado') : "",
+				'PresupuestoEnviado' => $enviado,
+				'fecha_envio_presupuesto' => $fecha_envio_presupuesto,
+				'PresupuestoAceptado' => $PresupuestoAceptado,
+				'fecha_presupuesto_aceptado' => $fecha_presupuesto_aceptado,
 				'SolicitudRefacciones' => ($this->input->post('SolicitudRefacciones')) ? $this->input->post('SolicitudRefacciones') : "",
 				'refaccionesact' => ($this->input->post('refaccionesact')) ? $this->input->post('refaccionesact') : "",
 				'TotalRefacciones' => ($this->input->post('TotalRefacciones')) ? $this->input->post('TotalRefacciones') : "",

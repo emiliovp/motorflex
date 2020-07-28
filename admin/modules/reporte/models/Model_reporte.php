@@ -96,8 +96,35 @@ class Model_reporte extends MY_Model {
 				$field = 'cat_marca.Descripcion';
 				$where .= "(".$field . " LIKE '%" . $q . "%' )";
 				break;
+			case 'estatus':
+				if (strtoupper($q) == 'EN TRANSITO') {
+					$where.='reporte.estado = 1';
+				}else if (strtoupper($q) == 'PISO') {
+					$where.='reporte.estado = 2';
+				}else if (strtoupper($q) == 'RAMPA') {
+					$where.='reporte.estado = 3';
+				}elseif (strtoupper($q) == 'TERMINADO') {
+					$where.='reporte.estado = 4';
+				}
+				break;
 			case 'todo':
 				$where = "1=1";
+				break;
+			case 'pt':
+				if (strtoupper($q) == 'V') {
+					$where .= 'if(TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) is null,0, TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d"))) <= 10';
+				}else if(strtoupper($q) == 'A'){
+					$where .= 'TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) > 10 and TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) <= 20';
+				}else if(strtoupper($q) == 'R') {
+					$where .= 'TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) > 20';
+				}	
+				break;
+			case 'pe':
+				if (strtoupper($q) == 'V') {
+					$where .= '(if(TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")),0, TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d"))) <= 1 AND `reporte`.PresupuestoAceptado = "SI") OR (if(TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")),0, TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d"))) > 1 AND `reporte`.PresupuestoAceptado = "SI")';
+				}else if(strtoupper($q) == 'R') {
+					$where .= 'TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) > 1 AND reporte.PresupuestoAceptado = "NO"';
+				}
 				break;
 			default:
 				$where .= "(" . "reporte.".$field . " LIKE '%" . $q . "%' )";
@@ -123,7 +150,7 @@ class Model_reporte extends MY_Model {
         $this->db->join('persona', 'persona.IdPersona = reporte.cliente', 'LEFT');
         $this->db->join('cat_marca', 'cat_marca.IdMarca = reporte.marca', 'LEFT');
         
-    	$this->db->select('reporte.*,if(persona.Apellidos = persona.Nombre,persona.Nombre, concat(persona.Apellidos," ",persona.Nombre)) AS persona_Apellidos,cat_marca.Descripcion as cat_marca_Descripcion, TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) as dias,TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) as dias_presupuesto');
+    	$this->db->select('reporte.*,if(persona.Apellidos = persona.Nombre,persona.Nombre, concat(persona.Apellidos," ",persona.Nombre)) AS persona_Apellidos,cat_marca.Descripcion as cat_marca_Descripcion, TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) as dias,TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) as dias_presupuesto, DATE_FORMAT(reporte.fechaingreso,"%d-%m-%Y %H-%i-%s") AS fechaingreso, DATE_FORMAT(reporte.created_at,"%d-%m-%Y %H-%i-%s") AS created_at, DATE_FORMAT(reporte.FechaEntrega,"%d-%m-%Y %H-%i-%s") AS FechaEntrega  ');
 
 
         return $this;

@@ -83,8 +83,9 @@
                             <div class="col-sm-8">
                                 <select  class="form-control chosen chosen-select" name="estado" id="estado" data-placeholder="Select estado" >
                                     <option value=""></option>
-                                    <option <?= $reporte->estado == "2" ? 'selected' :''; ?> value="2">En proceso</option>
-                                    <option <?= $reporte->estado == "3" ? 'selected' :''; ?> value="3">Cerrado</option>
+                                    <option <?= $reporte->estado == "2" ? 'selected' :''; ?> value="2">Piso</option>
+                                    <option <?= $reporte->estado == "3" ? 'selected' :''; ?> value="3">Rampa</option>
+                                    <option <?= $reporte->estado == "4" ? 'selected' :''; ?> value="3">Terminado</option>
                                     </select>
                                 <small class="info help-block">
                                 </small>

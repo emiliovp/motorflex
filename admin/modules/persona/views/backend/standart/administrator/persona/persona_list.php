@@ -115,7 +115,7 @@ jQuery(document).ready(domo);
                            <td><?= _ent($persona->correo); ?></td> 
                            <td><?= _ent($persona->RFC); ?></td> 
                            <td><?= _ent($persona->IdDireccion); ?></td> 
-                           <td><?= _ent($persona->cumpl); ?></td> 
+                           <td><?= _ent(date("d/m/Y", strtotime($persona->cumpl))); ?></td> 
                            <td width="200">
                               <?php is_allowed('persona_view', function() use ($persona){?>
                               <a href="<?= site_url('administrator/persona/view/' . $persona->IdPersona); ?>" class="label-default"><i class="fa fa-newspaper-o"></i> <?= cclang('view_button'); ?>

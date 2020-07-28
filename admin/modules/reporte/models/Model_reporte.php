@@ -150,7 +150,7 @@ class Model_reporte extends MY_Model {
         $this->db->join('persona', 'persona.IdPersona = reporte.cliente', 'LEFT');
         $this->db->join('cat_marca', 'cat_marca.IdMarca = reporte.marca', 'LEFT');
         
-    	$this->db->select('reporte.*,if(persona.Apellidos = persona.Nombre,persona.Nombre, concat(persona.Apellidos," ",persona.Nombre)) AS persona_Apellidos,cat_marca.Descripcion as cat_marca_Descripcion, TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) as dias,TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) as dias_presupuesto, DATE_FORMAT(reporte.fechaingreso,"%d-%m-%Y %H-%i-%s") AS fechaingreso, DATE_FORMAT(reporte.created_at,"%d-%m-%Y %H-%i-%s") AS created_at, DATE_FORMAT(reporte.FechaEntrega,"%d-%m-%Y %H-%i-%s") AS FechaEntrega  ');
+    	$this->db->select('reporte.*,if(persona.Apellidos = persona.Nombre,persona.Nombre, concat(persona.Apellidos," ",persona.Nombre)) AS persona_Apellidos,cat_marca.Descripcion as cat_marca_Descripcion, TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) as dias,TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) as dias_presupuesto, DATE_FORMAT(reporte.fechaingreso,"%d/%m/%Y") AS fechaingreso, DATE_FORMAT(reporte.created_at,"%d/%m/%Y %H:%i:%s") AS created_at, DATE_FORMAT(reporte.FechaEntrega,"%d/%m/%Y") AS FechaEntrega  ');
 
 
         return $this;

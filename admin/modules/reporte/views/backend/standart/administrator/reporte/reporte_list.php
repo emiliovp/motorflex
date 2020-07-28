@@ -1,7 +1,7 @@
 <style type="text/css">
 #circulo1 {
-	width: 4rem;
-	height: 4rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	background: #008000;
 	display: flex;
@@ -10,8 +10,8 @@
 	text-align: center;
 }
 #circulo2 {
-	width: 4rem;
-	height: 4rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	background: #FFEA00;
 	display: flex;
@@ -20,8 +20,8 @@
 	text-align: center;
 }
 #circulo3 {
-	width: 4rem;
-	height: 4rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	background: red;
 	display: flex;
@@ -154,11 +154,11 @@ jQuery(document).ready(domo);
                            }
                            ?><div id="<?php echo($circulo); ?>"></div></td>
                            <td><?php $circulo_pe = 'circulo1';
-                           if($reporte->dias < 1){
+                           if($reporte->dias_presupuesto <= 1){
                               $circulo_pe = 'circulo1';
-                           }else if ($reporte->dias > 1 && $reporte->PresupuestoAceptado == 'NO') {
+                           }else if ($reporte->dias_presupuesto > 1 && $reporte->PresupuestoEnviado == 'SI' && $reporte->PresupuestoAceptado == 'NO') {
                               $circulo_pe = 'circulo3';
-                           }else if ($reporte->dias > 1 && $reporte->PresupuestoAceptado == 'SI') {
+                           }else if ($reporte->dias_presupuesto >= 1 && $reporte->PresupuestoAceptado == 'SI') {
                               $circulo_pe = 'circulo1';
                            }
                            ?><div id="<?= $circulo_pe; ?>"></div></td>
@@ -223,6 +223,44 @@ jQuery(document).ready(domo);
                </div>
                <hr>
                <!-- /.widget-user -->
+               <div class="row" id="tiempos" style="display:none">
+                  <div class="col-md-12">
+                     <div class="col-sm-4 padd-left-0">
+                        <label class="form-control">Los valores para el filtrado son: En tiempo = V</label>
+                     </div>
+                     <div class="col-sm-1 padd-left-0">
+                        <div id="circulo1"></div>
+                     </div>
+                     <div class="col-sm-2 padd-left-0">
+                        <label class="form-control">Por vencer = A</label>
+                     </div>
+                     <div class="col-sm-1 padd-left-0">
+                        <div id="circulo2"></div>
+                     </div>
+                     <div class="col-sm-2 padd-left-0">
+                        <label class="form-control">Vencido = R</label>
+                     </div>
+                     <div class="col-sm-2 padd-left-0">
+                        <div id="circulo3"></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row" id="tiempos2" style="display:none">
+                  <div class="col-md-12">
+                     <div class="col-sm-4 padd-left-0">
+                        <label class="form-control">Los valores para el filtrado son: En tiempo = V</label>
+                     </div>
+                     <div class="col-sm-1 padd-left-0">
+                        <div id="circulo1"></div>
+                     </div>
+                     <div class="col-sm-2 padd-left-0">
+                        <label class="form-control">Vencido = R</label>
+                     </div>
+                     <div class="col-sm-2 padd-left-0">
+                        <div id="circulo3"></div>
+                     </div>
+                  </div>
+               </div>
                <div class="row">
                   <div class="col-md-8">
                      <div class="col-sm-2 padd-left-0 " >
@@ -240,7 +278,9 @@ jQuery(document).ready(domo);
                      <div class="col-sm-3 padd-left-0 " >
                         <select type="text" class="form-control chosen chosen-select" name="f" id="field" >
                            <option value="todo"><?= cclang('all'); ?></option>
-                            <option <?= $this->input->get('f') == 'NumeroReporte' ? 'selected' :''; ?> value="NumeroReporte">Numero Reporte</option>
+                           <option <?= $this->input->get('f') == 'pt' ? 'selected' :''; ?> value="pt">PT</option>
+                           <option <?= $this->input->get('f') == 'pe' ? 'selected' :''; ?> value="pe">PE</option>
+                           <option <?= $this->input->get('f') == 'NumeroReporte' ? 'selected' :''; ?> value="NumeroReporte">Numero Reporte</option>
                            <option <?= $this->input->get('f') == 'cliente' ? 'selected' :''; ?> value="cliente">Cliente</option>
                            <option <?= $this->input->get('f') == 'fechaingreso' ? 'selected' :''; ?> value="fechaingreso">Fecha ingreso</option>
                            <option <?= $this->input->get('f') == 'orden' ? 'selected' :''; ?> value="orden">Orden</option>
@@ -381,6 +421,18 @@ jQuery(document).ready(domo);
         }
         checkAll.iCheck('update');
     });
-
+   $(document).on('change','#field',function(){
+      var tiempo = $(this).val();
+      if (tiempo == 'pt'){
+         $('#tiempos').show();
+         $('#tiempos2').hide();
+      }else if(tiempo == 'pe'){
+         $('#tiempos2').show();
+         $('#tiempos').hide();
+      }else{
+         $('#tiempos').hide();
+         $('#tiempos2').hide();
+      }
+   });
   }); /*end doc ready*/
 </script>

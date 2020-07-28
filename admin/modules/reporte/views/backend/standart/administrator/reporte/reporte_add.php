@@ -74,6 +74,7 @@
                             </label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" name="NumeroReporte" id="NumeroReporte" placeholder="Número De Reporte" value="<?= set_value('NumeroReporte'); ?>">
+                                <p id="errorNoReporteDuplicado" style="display: none;color: red;">No. de reporte duplicado - Favor de ingresar otro no. de reporte</p>
                                 <small class="info help-block">
                                 </small>
                             </div>
@@ -555,6 +556,30 @@ if ($("#RefaccionesDispoiblesPorcentaje").val() != 0) {
 </script>
 <script>
 (function($) {
+    $('#NumeroReporte').keyup(function () {
+        var form_reporte = $('#form_reporte');
+        var data_post = form_reporte.serializeArray();
+        var numReporte = $(this).val();
+        data_post.push({name: 'NumeroReporte', value: numReporte});
+
+        $.ajax({
+          url: BASE_URL + 'administrator/reporte/searchReporte',
+          type: 'POST',
+          dataType: 'json',
+          data: data_post,
+        }).done(function(res) {
+            if(res >= 1) {
+                $("#errorNoReporteDuplicado").css("display", "block");
+                $(".btn_action").prop("disabled", true);
+            } else {
+                $("#errorNoReporteDuplicado").css("display", "none");
+                $(".btn_action").prop("disabled", false);
+            }
+        }).fail(function() {
+            // $('.message').printMessage({message : 'Error save data', type : 'warning'});
+        });
+    });
+
     $("#perdida_total").change(function() {
         var perdidatotal = $(this).val();
         var pagodanos = $("#pago_danos").val();

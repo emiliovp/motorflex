@@ -455,6 +455,10 @@ class Reporte extends Admin
 
 		redirect_back();
 	}
+
+	public function searchReporte() {
+		echo $this->model_reporte->searchByNumberReport(null, null, $this->input->post('NumeroReporte'));
+	}
 }
 
 

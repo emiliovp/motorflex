@@ -95,7 +95,7 @@
                             <i class="required">*</i>
                             </label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="NumeroReporte" id="NumeroReporte" placeholder="Número De Reporte" value="<?= set_value('NumeroReporte', $reporte->NumeroReporte); ?>">
+                                <input type="text" readonly class="form-control" name="NumeroReporte" id="NumeroReporte" placeholder="Número De Reporte" value="<?= set_value('NumeroReporte', $reporte->NumeroReporte); ?>">
                                 <small class="info help-block">
                                 </small>
                             </div>

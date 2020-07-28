@@ -56,7 +56,16 @@ class Model_reporte extends MY_Model {
 
 		return $query->num_rows();
 	}
+	public function searchByNumberReport($q = null, $field = null, $numberReporte)
+	{
+		$iterasi = 1;
+        $num = count($this->field_search);
+		$where = ("reporte.NumeroReporte =".$numberReporte);
+        $this->db->where($where);
+		$query = $this->db->get($this->table_name);
 
+		return $query->num_rows();
+	}
 	public function get($q = null, $field = null, $estatus = 1 ,$limit = 0, $offset = 0, $select_field = [])
 	{
 		$iterasi = 1;

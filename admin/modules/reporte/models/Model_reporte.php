@@ -87,6 +87,17 @@ class Model_reporte extends MY_Model {
 				$field = 'cat_marca.Descripcion';
 				$where .= "(".$field . " LIKE '%" . $q . "%' )";
 				break;
+			case 'estatus':
+				if (strtoupper($q) == 'EN TRANSITO') {
+					$where.='reporte.estado = 1';
+				}else if (strtoupper($q) == 'PISO') {
+					$where.='reporte.estado = 2';
+				}else if (strtoupper($q) == 'RAMPA') {
+					$where.='reporte.estado = 3';
+				}elseif (strtoupper($q) == 'TERMINADO') {
+					$where.='reporte.estado = 4';
+				}
+				break;
 			case 'todo':
 				$where = "1=1";
 				break;

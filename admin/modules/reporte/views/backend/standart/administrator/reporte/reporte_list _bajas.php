@@ -183,13 +183,16 @@ jQuery(document).ready(domo);
                            <td><?= _ent($reporte->FechaEntrega); ?></td>
                            <td><?php $var= $reporte->estado; switch ($var) {
                               case '1':
-                                 $estado = "Abierto";
+                                 $estado = "EN TRANSITO";
                                  break;
                               case '2':
-                                 $estado = "En proceso";
+                                 $estado = "PISO";
                                  break;
                               case '3':
-                                 $estado = "Cerrado";
+                                 $estado = "RAMPA";
+                                 break;
+                              case '3':
+                                 $estado = "TERMINADO";
                                  break;
                            } echo($estado); ?></td> 
                            <td width="200">
@@ -288,6 +291,7 @@ jQuery(document).ready(domo);
                            <option <?= $this->input->get('f') == 'Deducible' ? 'selected' :''; ?> value="Deducible">Deducible</option>
                            <option <?= $this->input->get('f') == 'MontoDeducible' ? 'selected' :''; ?> value="MontoDeducible">Monto Deducible</option>
                            <option <?= $this->input->get('f') == 'FechaEntrega' ? 'selected' :''; ?> value="FechaEntrega">Fecha Entrega</option>
+                           <option <?= $this->input->get('f') == 'estatus' ? 'selected' :''; ?> value="estatus">Estatus</option>
                           </select>
                      </div>
                      <div class="col-sm-1 padd-left-0 ">

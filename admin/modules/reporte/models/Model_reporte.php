@@ -126,6 +126,12 @@ class Model_reporte extends MY_Model {
 					$where .= 'TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) > 1 AND reporte.PresupuestoAceptado = "NO"';
 				}
 				break;
+			case 'fechaingreso':
+				$where.='DATE_FORMAT(reporte.fechaingreso,"%d/%m/%Y") = "'.$q.'"';
+				break;
+			case 'FechaEntrega':
+				$where.='DATE_FORMAT(reporte.FechaEntrega,"%d/%m/%Y") = "'.$q.'"';
+				break;
 			default:
 				$where .= "(" . "reporte.".$field . " LIKE '%" . $q . "%' )";
 				break;

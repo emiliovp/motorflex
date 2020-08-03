@@ -117,6 +117,8 @@ class Model_reporte extends MY_Model {
 					$where .= 'TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) > 10 and TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) <= 20';
 				}else if(strtoupper($q) == 'R') {
 					$where .= 'TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.created_at,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) > 20';
+				}else{
+					$where .= '1=1';
 				}	
 				break;
 			case 'pe':
@@ -124,6 +126,8 @@ class Model_reporte extends MY_Model {
 					$where .= '(if(TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")),0, TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d"))) <= 1 AND `reporte`.PresupuestoAceptado = "SI") OR (if(TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")),0, TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d"))) > 1 AND `reporte`.PresupuestoAceptado = "SI")';
 				}else if(strtoupper($q) == 'R') {
 					$where .= 'TIMESTAMPDIFF(DAY, DATE_FORMAT(reporte.fecha_envio_presupuesto,"%Y-%m-%d"), DATE_FORMAT(now(),"%Y-%m-%d")) > 1 AND reporte.PresupuestoAceptado = "NO"';
+				}else{
+					$where .= '1=1';
 				}
 				break;
 			case 'fechaingreso':

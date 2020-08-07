@@ -18,7 +18,7 @@ $salida="";
 
 //valida si el numero de reporte ya se encuentra registrado
 
-$vreporte = select('comentario_externo,NumeroReporte,FechaIngreso,Valuacion,PresupuestoEnviado,PresupuestoAceptado,'
+$vreporte = select('estado,comentario_externo,NumeroReporte,FechaIngreso,Valuacion,PresupuestoEnviado,PresupuestoAceptado,'
 
         . 'SolicitudRefacciones,refacciones_faltantes,ReparacionUnidadPorcentaje,'
 
@@ -36,17 +36,32 @@ if (num($vreporte)>0){
 
             . "<th>Presupuesto Aceptado</th><th>Solicitud Refacciones</th><th>Refacciones faltantes</th>"
 
-            . "<th>Unidad en Rampa</th><th>Reparación Unidad %</th><th>Deducible</th><th>Monto Deducible</th><th>Fecha de Entrega</th></tr></thead>";
+            . "<th>Unidad en Rampa</th><th>Reparación Unidad %</th><th>Deducible</th><th>Monto Deducible</th><th>Fecha de Entrega</th><th>Estado</th></tr></thead>";
 
     $comentarioExterno = "";
 
     while($fila=$vreporte->fetch_assoc()){
-
+        $estado = "";
+        switch ($fila['estado']) {
+            case '1':
+                $estado = "EN TRANSITO";
+                break;
+             case '2':
+                $estado = "PISO";
+                break;
+             case '3':
+                $estado = "RAMPA";
+                break;
+             case '3':
+                $estado = "TERMINADO";
+                break;
+        }
+        
         $salida.="<tbody class='tbody-gris'><tr>"
-
+        
                 . "<td data-th='Número de reporte'>".$fila['NumeroReporte']."</td>"
 
-                . "<td data-th='Fecha de ingreso'>".$fila['FechaIngreso']."</td>"
+                . "<td data-th='Fecha de ingreso'>".date('d-m-Y', strtotime($fila['FechaIngreso']))."</td>"
 
                 . "<td data-th='Valuación'>".$fila['Valuacion']."</td>"
 
@@ -67,7 +82,9 @@ if (num($vreporte)>0){
                 ."<td data-th='Monto Deducible'>$".$fila['MontoDeducible']."</td>"
 
                 ."<td data-th='Fecha de entrega'>".$fila['FechaEntrega']."</td>"
-
+                
+                . "<td data-th='Estado'>".$estado."</td>"
+                
                 . "</tr>";
                 $comentarioExterno = $fila["comentario_externo"];
     }

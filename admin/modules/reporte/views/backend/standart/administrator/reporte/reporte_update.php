@@ -85,7 +85,7 @@
                                     <option value=""></option>
                                     <option <?= $reporte->estado == "2" ? 'selected' :''; ?> value="2">Piso</option>
                                     <option <?= $reporte->estado == "3" ? 'selected' :''; ?> value="3">Rampa</option>
-                                    <option <?= $reporte->estado == "4" ? 'selected' :''; ?> value="3">Terminado</option>
+                                    <option <?= $reporte->estado == "4" ? 'selected' :''; ?> value="4">Terminado</option>
                                     </select>
                                 <small class="info help-block">
                                 </small>

@@ -181,7 +181,8 @@ jQuery(document).ready(domo);
                            <td><?= _ent($reporte->Deducible); ?></td> 
                            <td><?= _ent($reporte->MontoDeducible); ?></td> 
                            <td><?= _ent($reporte->FechaEntrega); ?></td>
-                           <td><?php $var= $reporte->estado; switch ($var) {
+                           <td><?php $var= $reporte->estado; $estado = "--"; 
+                           switch ($var) {
                               case '1':
                                  $estado = "EN TRANSITO";
                                  break;
@@ -191,7 +192,7 @@ jQuery(document).ready(domo);
                               case '3':
                                  $estado = "RAMPA";
                                  break;
-                              case '3':
+                              case '4':
                                  $estado = "TERMINADO";
                                  break;
                            } echo($estado); ?></td> 
